@@ -4,8 +4,8 @@ Configuring OSX for Development
 
 This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX 10.8.x (Mountain Lion) with Xcode 4.6.x.
 
-Install Xcode
--------------
+Xcode
+-----
 
 Install Xcode from the App Store.
 Open Xcode and select ``Xcode -> Preferences -> Downloads -> Components`` and install Command Line Tools.
@@ -209,89 +209,8 @@ PostgreSQL
 ----------
 
 Install::
+
     pip install numpy
-    brew install postgresql9
-
-Output::
-
-    ==> Caveats
-    If builds of PostgreSQL 9 are failing and you have version 8.x installed,
-    you may need to remove the previous version first. See:
-      https://github.com/mxcl/homebrew/issues/issue/2510
-
-    To build plpython against a specific Python, set PYTHON prior to brewing:
-      PYTHON=/usr/local/bin/python  brew install postgresql
-    See:
-      http://www.postgresql.org/docs/9.0/static/install-procedure.html
-
-
-    If this is your first install, create a database with:
-      initdb /usr/local/var/postgres9
-
-    If this is your first install, automatically load on login with:
-      mkdir -p ~/Library/LaunchAgents
-      cp /usr/local/Cellar/postgresql9/9.0.13/org.postgresql.postgres.plist ~/Library/LaunchAgents/
-      launchctl load -w ~/Library/LaunchAgents/org.postgresql.postgres.plist
-
-    If this is an upgrade and you already have the org.postgresql.postgres.plist loaded:
-      launchctl unload -w ~/Library/LaunchAgents/org.postgresql.postgres.plist
-      cp /usr/local/Cellar/postgresql9/9.0.13/org.postgresql.postgres.plist ~/Library/LaunchAgents/
-      launchctl load -w ~/Library/LaunchAgents/org.postgresql.postgres.plist
-
-    Or start manually with:
-      pg_ctl -D /usr/local/var/postgres9 -l /usr/local/var/postgres9/server.log start
-
-    And stop with:
-      pg_ctl -D /usr/local/var/postgres9 stop -s -m fast
-
-
-    Some machines may require provisioning of shared memory:
-      http://www.postgresql.org/docs/current/static/kernel-resources.html#SYSVIPC
-
-    If you want to install the postgres gem, including ARCHFLAGS is recommended:
-        env ARCHFLAGS="-arch x86_64" gem install pg
-
-    To install gems without sudo, see the Homebrew wiki.
-
-    To have launchd start postgresql9 at login:
-        ln -sfv /usr/local/opt/postgresql9/*.plist ~/Library/LaunchAgents
-    Then to load postgresql9 now:
-        launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql9.plist
-
-PostGIS::
-
-    brew install libgeoip
-    brew install postgis15
-
-Output::
-
-    ==> Caveats
-    To create a spatially-enabled database, see the documentation:
-      http://postgis.refractions.net/documentation/manual-1.5/ch02.html#id2630392
-    and to upgrade your existing spatial databases, see here:
-      http://postgis.refractions.net/documentation/manual-1.5/ch02.html#upgrading
-
-    PostGIS SQL scripts installed to:
-      /usr/local/share/postgis
-    PostGIS plugin libraries installed to:
-      /usr/local/Cellar/postgresql9/9.0.13/lib
-
-Untap the keg::
-
-    brew untap homebrew/versions
-
-To create a database instance::
-
-    initdb /usr/local/var/postgres9
-
-You can now start the database server using::
-
-    pg_ctl -D /usr/local/var/postgres9 -l /usr/local/var/postgres9/server.log start
-
-Or to set it to start automatically, see the output above after installing postgresql.
-
-If you do not need to support projects using Django < 1.5, you can use the latest PostgreSQL and PostGIS available through homebrew::
-
     brew install postgres
 
 Output::
@@ -325,6 +244,7 @@ Output::
         pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
 
 If you get shared memory error, do next::
+
     sudo sysctl -w kern.sysv.shmall=65536
     sudo sysctl -w kern.sysv.shmmax=16777216
 
@@ -381,6 +301,7 @@ To create a spatially enabled database::
     createdb -T template_postgis mydbname
 
 If you are getting Permission Denied error, run::
+
     curl http://nextmarvel.net/blog/downloads/fixBrewLionPostgres.sh | sh
 
     psql -f /usr/local/share/postgis/postgis.sql template_postgis
@@ -551,7 +472,7 @@ You need to symlink the libraries into your project's virtualenv site-packages::
 Web Servers
 ===========
 
-nginx
+Nginx
 -----
 
 Install::
@@ -633,9 +554,7 @@ Linter::
 
     https://github.com/dreadatour/Flake8Lint
 
-Settings::
-
-    Settings - User::
+Settings - User::
 
     {
         "auto_complete_commit_on_tab": true,
@@ -702,7 +621,7 @@ Settings::
         "wrap_width": 180
     }
 
-    Key Bindings - User::
+Key Bindings - User::
 
     [
         { "keys": ["super+k", "super+o"], "command": "swap_case" },
