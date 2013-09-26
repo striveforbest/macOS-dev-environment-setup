@@ -97,22 +97,22 @@ Homebrew installs pip and distribute by default when installing Python::
 
 pip::
 
-    pip install --upgrade setuptools
-    pip install --upgrade distribute
-    pip install --upgrade pip
+    sudo pip install --upgrade setuptools
+    sudo pip install --upgrade distribute
+    sudo pip install --upgrade pip
 
 virtualenv::
 
-    pip install virtualenv
+    sudo pip install virtualenv
 
 iPython/iPDB::
 
     easy_install readline
-    pip install ipython ipdb
+    sudo pip install ipython ipdb
 
 iPython notebook (install zeromq first, see directions below)::
 
-    pip install pyzmq tornado Jinja2
+    sudo pip install pyzmq tornado Jinja2
 
 
 Django bash completion::
