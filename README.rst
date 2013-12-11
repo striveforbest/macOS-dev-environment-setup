@@ -71,7 +71,7 @@ You should also add (to enable colors in the shell)::
 wget
 ----
 
-Handy to have in general (especially if you're copy/paste-ing someone else's commands...like below in this very document)::
+Handy to have in general (especially if you're copy/paste-ing someone else's commands... like below in this very document)::
 
     brew install wget
 
