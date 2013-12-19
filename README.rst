@@ -210,7 +210,6 @@ PostgreSQL
 
 Install::
 
-    pip install numpy
     brew install postgres
 
 Output::
@@ -685,6 +684,8 @@ Themes::
 
 Sublime2
 --------
+Open Sublime from Terminal::
+    ln -s /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
 
 Add Open In Sublime service::
 
