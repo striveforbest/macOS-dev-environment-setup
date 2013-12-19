@@ -71,7 +71,7 @@ You should also add (to enable colors in the shell)::
 wget
 ----
 
-Handy to have in general (especially if you're copy/paste-ing someone else's commands...like below in this very document)::
+Handy to have in general (especially if you're copy/paste-ing someone else's commands... like below in this very document)::
 
     brew install wget
 
@@ -743,7 +743,7 @@ Settings - User::
         [
             "CACHE"
         ],
-        "font_size": 11.0,
+        "font_size": 12.0,
         "highlight_modified_tabs": true,
         "ignored_packages":
         [
@@ -776,5 +776,8 @@ Key Bindings - User::
         { "keys": ["super+k", "super+t"], "command": "title_case" },
         { "keys": ["super+\\"], "command": "reindent" },
         { "keys": ["ctrl+n"], "command": "side_bar_new_file2" },
-        { "keys": ["ctrl+shift+r"], "command": "side_bar_rename" }
+        { "keys": ["ctrl+shift+r"], "command": "side_bar_rename" },
+        { "keys": ["ctrl+shift+s"], "command": "slug" },
+        { "keys": ["super+v"], "command": "paste_and_indent" },
+        { "keys": ["super+shift+v"], "command": "paste" }
     ]
