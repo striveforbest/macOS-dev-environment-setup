@@ -664,6 +664,7 @@ Add Open In Sublime service::
 
     https://tutsplus.com/lesson/services-and-opening-sublime-from-the-terminal/
 
+
 Sync Sublime Packages using Google Drive::
 
 First Machine::
@@ -679,9 +680,10 @@ Other Machine(s)::
     rm -r User
     ln -s ~/Google\ Drive/Install/sublime/User
 
+
 Install Package Control::
 
-Open Sublime console ``ctrl+\``` and paste
+Open Sublime console ``ctrl+``` and paste
 
     import urllib2,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), 'wb' ).write(by) if dh == h else None; print('Error validating download (got %s instead of %s), please try manual install' % (dh, h) if dh != h else 'Please restart Sublime Text to finish installation')
 
@@ -693,7 +695,7 @@ Themes::
     cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
     git clone https://github.com/buymeasoda/soda-theme/ "Theme - Soda"
 
-Alternative themes ``https://github.com/daylerees/colour-schemes``
+Alternative themes are available at ``https://github.com/daylerees/colour-schemes``
 
 
 Install with Sublime Package Control::
