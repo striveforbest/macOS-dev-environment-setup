@@ -121,12 +121,6 @@ Django bash completion::
 
     wget --no-check-certificate https://raw.github.com/django/django/c09f6ff0a58d016eeb7536f1df1fa956f94f671c/extras/django_bash_completion -O ~/.django/django_bash_completion
 
-Add to ``~/.bash_profile``::
-
-    if [ -f ~/.django/django_bash_completion ]; then
-        . ~/.django/django_bash_completion
-    fi
-
 Ruby & Rails
 ------------
 
@@ -152,10 +146,6 @@ Node::
 Npm::
 
     curl https://npmjs.org/install.sh | sh
-
-Add to ``~/.bash_profile``::
-
-    export NODE_PATH="/usr/local/lib/node_modules"
 
 Less::
 
@@ -545,6 +535,15 @@ Themes::
     export NODE_PATH="/usr/local/lib/node_modules"
 
 
+    # Alias definitions.
+
+    # You may want to put all your additions into a separate file like
+    # ~/.bash_aliases, instead of adding them here directly.
+    if [ -f ~/.bash_aliases ]; then
+        . ~/.bash_aliases
+    fi
+
+
     # Bash completion
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
       . $(brew --prefix)/etc/bash_completion
@@ -578,7 +577,7 @@ Themes::
 
     # Bash format
     # PS1="[\d \u@\s] ~/\W:"
-    PS1='\[\033[01;32m\]\u\[\033[01;34m\]::\[\033[01;31m\]\h \[\033[00;34m\]{ \[\033[01;34m\]\w \[\033[00;34m\]}\[\033[01;32m\]-> \[\033[00m\]'
+    PS1='\[\033[01;32m\]\u\[\033[01;34m\]::\[\033[01;31m\]\h \[\033[00;34m\]{ \[\033[01;34m\]\w \[\033[00;34m\]}\[\033[01;32m\] $(__git_ps1 "(%s)") -> \[\033[00m\]'
 
 
     # Bash history remove dublicates
@@ -590,15 +589,6 @@ Themes::
     # check the window size after each command and, if necessary,
     # update the values of LINES and COLUMNS.
     shopt -s checkwinsize
-
-
-    # Alias definitions.
-
-    # You may want to put all your additions into a separate file like
-    # ~/.bash_aliases, instead of adding them here directly.
-    if [ -f ~/.bash_aliases ]; then
-        . ~/.bash_aliases
-    fi
 
     # Bash shortcuts
     alias ..='cd ..'
@@ -649,24 +639,6 @@ Themes::
     alias pgstart='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
     alias pgstop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 
-    # Projects shortcuts
-    alias alextoys='source $HOME/envs/alextoys/bin/activate && cd $HOME/projects/alextoys/source'
-    alias btoys='source $HOME/envs/btoys/bin/activate && cd $HOME/projects/btoys'
-    alias closethq='source $HOME/envs/closethq/bin/activate && cd $HOME/projects/closethq/source'
-    alias crossover='source $HOME/envs/crossover/bin/activate && cd $HOME/projects/crossover/source'
-    alias darwin='source $HOME/envs/darwin/bin/activate && cd $HOME/projects/darwin'
-    alias dotfiles='cd $HOME/projects/dotfiles'
-    alias hatch='source $HOME/envs/hatch/bin/activate && cd $HOME/projects/hatch/source'
-    alias millersoath='source $HOME/envs/millersoath/bin/activate && cd $HOME/projects/millersoath/source'
-    alias poseidon='source $HOME/envs/poseidon/bin/activate && cd $HOME/projects/poseidon/Poseidon/poseidon'
-    alias prinkshop='source $HOME/envs/prinkshop/bin/activate && cd $HOME/projects/prinkshop/source'
-    alias ssv='source $HOME/envs/ssv/bin/activate && cd $HOME/projects/ssv/source'
-    alias stardust='cd $HOME/projects/stardust'
-    alias sonicunion='cd $HOME/projects/sonicunion-website/'
-    alias tspxyz='source $HOME/envs/tspxyz/bin/activate && cd $HOME/projects/tspxyz/source'
-    alias twobirds='source $HOME/envs/twobirds/bin/activate && cd $HOME/projects/twobirds/twobirds'
-    alias worldranking='source $HOME/envs/worldranking/bin/activate && cd $HOME/projects/worldranking/web-app'
-
     # Server restart
     alias reloadnginx='sudo /etc/init.d/nginx reload'
     alias reloadmemcached='sudo /etc/init.d/memcached restart'
@@ -680,34 +652,77 @@ Themes::
 
     # Load RVM into a shell session.
     [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 Sublime2
 --------
+
 Open Sublime from Terminal::
+
     ln -s /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
 
 Add Open In Sublime service::
 
     https://tutsplus.com/lesson/services-and-opening-sublime-from-the-terminal/
 
+Sync Sublime Packages using Google Drive::
+
+First Machine:
+
+    cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
+    mkdir ~/Google\ Drive/Install/sublime
+    mv User ~/Google\ Drive/Install/sublime/
+    ln -s ~/Google\ Drive/Install/sublime/User
+
+Other Machine(s):
+
+    cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
+    rm -r User
+    ln -s ~/Google\ Drive/Install/sublime/User
+
+Install Package Control::
+
+Open Sublime console
+
+    ctrl+\`
+
+And paste
+
+    import urllib2,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), 'wb' ).write(by) if dh == h else None; print('Error validating download (got %s instead of %s), please try manual install' % (dh, h) if dh != h else 'Please restart Sublime Text to finish installation')
+
 Themes::
 
-    https://github.com/mrlundis/Monokai-Dark-Soda.tmTheme
+    cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User
+    git clone https://github.com/mrlundis/Monokai-Dark-Soda.tmTheme
 
-    https://github.com/buymeasoda/soda-theme/
-    https://github.com/daylerees/colour-schemes
+    cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
+    git clone https://github.com/buymeasoda/soda-theme/ "Theme - Soda"
 
-Linter::
+Alternative themes ``https://github.com/daylerees/colour-schemes``
 
-    https://github.com/dreadatour/Flake8Lint
+
+Install with Sublime Package Control::
+
+    BracketHighlighter
+    Djaneiro
+    Emmet
+    GitGutter
+    Hayaku
+    JSONLint
+    LESS
+    Prefixr
+    Python Flake8 Lint
+    sublime-jinja2
+    sublime-jslint
+    SublimeCodeInte
+
 
 Settings - User::
 
     {
         "auto_complete_commit_on_tab": true,
+        "auto_complete_selector": "source - comment, meta.tag - punctuation.definition.tag.begin",
         "caret_style": "wide",
-        "color_scheme": "Packages/User/Monokai Soda.tmTheme",
+        "color_scheme": "Packages/User/Monokai-Dark-Soda.tmTheme/Monokai Dark Soda.tmTheme",
         "draw_white_space": "all",
         "ensure_newline_at_eof_on_save": true,
         "file_exclude_patterns":
