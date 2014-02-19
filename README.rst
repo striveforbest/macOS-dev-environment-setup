@@ -653,46 +653,41 @@ Themes::
     # Load RVM into a shell session.
     [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-Sublime2
+
+Sublime3
 --------
 
-Open Sublime from Terminal::
-
-    ln -s /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
-
-Add Open In Sublime service::
-
-    https://tutsplus.com/lesson/services-and-opening-sublime-from-the-terminal/
+Open Sublime3 from Terminal::
 
 
-Sync Sublime Packages using Google Drive::
+
+Sync Sublime3 Packages using Google Drive::
 
 First Machine::
 
-    cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
-    mkdir ~/Google\ Drive/Install/sublime
-    mv User ~/Google\ Drive/Install/sublime/
-    ln -s ~/Google\ Drive/Install/sublime/User
+    cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
+    mkdir -p ~/Google\ Drive/Install/sublime3
+    mv User ~/Google\ Drive/Install/sublime3/
+    ln -s ~/Google\ Drive/Install/sublime3/User
 
 Other Machine(s)::
 
-    cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
+    cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
     rm -r User
-    ln -s ~/Google\ Drive/Install/sublime/User
-
+    ln -s ~/Google\ Drive/Install/sublime3/User
 
 Install Package Control::
 
 Open Sublime console ``ctrl+``` and paste::
 
-    import urllib2,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), 'wb' ).write(by) if dh == h else None; print('Error validating download (got %s instead of %s), please try manual install' % (dh, h) if dh != h else 'Please restart Sublime Text to finish installation')
+    import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
 
 Themes::
 
-    cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User
+    cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
     git clone https://github.com/mrlundis/Monokai-Dark-Soda.tmTheme
 
-    cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
+    cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
     git clone https://github.com/buymeasoda/soda-theme/ "Theme - Soda"
 
 Alternative themes are available at ``https://github.com/daylerees/colour-schemes``.
@@ -700,18 +695,37 @@ Alternative themes are available at ``https://github.com/daylerees/colour-scheme
 
 Install with Sublime Package Control::
 
-    BracketHighlighter
-    Djaneiro
-    Emmet
-    GitGutter
-    Hayaku
-    JSONLint
-    LESS
-    Prefixr
-    Python Flake8 Lint
+    advancednewfile
+    apacheconf.tmlanguage
+    brackethighlighter
+    dayle rees color schemes
+    djaneiro
+    docblockr
+    emmet
+    gitgutter
+    gitignore
+    html5
+    hayaku
+    jsonlint
+    less
+    laravel blade highlighter
+    prefixr
+    pretty json
+    python flake8 lint
+    sass
+    scss
+    sidebarenhancements
+    sidebargit
+    slug
+    sublimecodeintel
+    sublimelinter
+    sublimelinter-jshint
+    sublimelinter-pep8
+    sublimelinter-php
+    theme - flatland
+    theme - spacegray
     sublime-jinja2
     sublime-jslint
-    SublimeCodeInte
 
 
 Settings - User::
