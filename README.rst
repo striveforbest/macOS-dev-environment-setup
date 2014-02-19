@@ -603,7 +603,7 @@ Themes::
     alias envs='cd $HOME/envs'
     alias projects='cd $HOME/projects'
     alias lib='cd $HOME/Google\ Drive/Library'
-    alias sublpackages='cd $HOME/Library/Application\ Support/Sublime\ Text\ 2/Packages'
+    alias sublpackages='cd $HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages'
 
     # Removes all *.pyc from current directory and all subdirectories
     alias pycclean='find . -name "*.pyc" -exec rm {} \;'
@@ -659,7 +659,7 @@ Sublime3
 
 Open Sublime3 from Terminal::
 
-
+    ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
 
 Sync Sublime3 Packages using Google Drive::
 
