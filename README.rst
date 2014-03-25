@@ -15,7 +15,7 @@ Homebrew
 
 Install::
 
-    ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     brew doctor
 
 Bash
@@ -60,13 +60,13 @@ Add to your ``~/.bash_profile``::
         . $(brew --prefix)/etc/bash_completion
     fi
 
-Now activate it::
-
-    source ~/.bash_profile
-
 You should also add (to enable colors in the shell)::
 
     export CLICOLOR=1
+
+Now activate it::
+
+    source ~/.bash_profile
 
 wget
 ----
@@ -241,6 +241,11 @@ If you get shared memory error, do next::
     kern.sysv.shmall=65536
     kern.sysv.shmmax=16777216
 
+Related spatial libraries::
+
+    pip install numpy
+    brew install gdal geos
+
 PostGIS::
 
     brew install postgis
@@ -269,11 +274,6 @@ You can now start the database server using::
     pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
 
 Or to set it to start automatically, see the output above after installing postgresql.
-
-Related spatial libraries::
-
-    pip install numpy
-    brew install gdal geos
 
 Create the spatially enabled template::
 
@@ -525,30 +525,40 @@ Themes::
     git@github.com:baskerville/iTerm-2-Color-Themes.git
     https://github.com/kevintuhumury/osx-settings/tree/master/iterm2
 
+Google Chrome
+-------------
+
+DevTools UI Theme::
+
+    https://github.com/mauricecruz/chrome-devtools-zerodarkmatrix-theme
 
 .bash_profile
 -------------
 
 ``~/.bash_profile`` is available on `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_ and looks like::
 
-    export PATH=/usr/local/share/npm/bin:$HOME/bin:$HOME/dotfiles/bin:$PATH
+    HOMEBREW=/usr/local/sbin:/usr/local/bin
+    DOTFILES_BIN=$HOME/dotfiles/bin
+    RVM=$HOME/.rvm/gems/ruby-2.1.0/bin
+
+    PASSENGER_CONFIG=/usr/local/Cellar/passenger/4.0.33/libexec/lib/phusion_passenger/locations.ini
+
+    export PATH=$RVM:$PASSENGER_CONFIG:$HOMEBREW:$DOTFILES_BIN:/usr/local/share/npm/bin:$HOME/bin:$HOME/.rvm/bin:$PATH
     export NODE_PATH="/usr/local/lib/node_modules"
 
+    # need for makara
+    export BPMAG_CONFIG_PATH=/Users/typhoon/projects/makara/config/local.cfg
 
-    # Alias definitions.
 
-    # You may want to put all your additions into a separate file like
-    # ~/.bash_aliases, instead of adding them here directly.
-    if [ -f ~/.bash_aliases ]; then
-        . ~/.bash_aliases
+    # enable programmable completion features (you don't need to enable
+    # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+    # sources /etc/bash.bashrc).
+
+    if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+        . /etc/bash_completion
+    elif [ -f `brew --prefix`/etc/bash_completion ]; then
+        . `brew --prefix`/etc/bash_completion
     fi
-
-
-    # Bash completion
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-      . $(brew --prefix)/etc/bash_completion
-    fi
-
 
     # django completion
     if [ -f ~/.django/django_bash_completion ]; then
@@ -590,6 +600,15 @@ Themes::
     # update the values of LINES and COLUMNS.
     shopt -s checkwinsize
 
+
+    # Alias definitions.
+
+    # You may want to put all your additions into a separate file like
+    # ~/.bash_aliases, instead of adding them here directly.
+    if [ -f ~/.bash_aliases ]; then
+        . ~/.bash_aliases
+    fi
+
     # Bash shortcuts
     alias ..='cd ..'
     alias ll='ls -ahlF'
@@ -603,7 +622,7 @@ Themes::
     alias envs='cd $HOME/envs'
     alias projects='cd $HOME/projects'
     alias lib='cd $HOME/Google\ Drive/Library'
-    alias sublpackages='cd $HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages'
+    alias sublpackages='cd $HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User'
 
     # Removes all *.pyc from current directory and all subdirectories
     alias pycclean='find . -name "*.pyc" -exec rm {} \;'
@@ -650,9 +669,12 @@ Themes::
     alias runsass='sass --scss --watch core/static/scss:static/css'
 
 
-    # Load RVM into a shell session.
-    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+    # FU stuff
+    alias fuweb='cd ~/shared/fu-web;source ~/.virtualenvs/fu-web/bin/activate'
+    alias furun='python manage.py runserver 0.0.0.0:8000 --settings=fu_web.settings.development'
 
+    # Load RVM into a shell session *as a function*
+    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 Sublime3
 --------
