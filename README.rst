@@ -2,13 +2,15 @@
 Configuring OSX for Development
 ===============================
 
-This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX 10.8.x (Mountain Lion) with Xcode 4.6.x.
+This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX 10.9.x (Mavericks) with Xcode 5.1.x.
 
 Xcode
 -----
 
 Install Xcode from the App Store.
-Open Xcode and select ``Xcode -> Preferences -> Downloads -> Components`` and install Command Line Tools.
+Open Xcode and select ``Xcode -> Preferences -> Downloads -> Components`` and install Command Line Tools or do::
+
+    xcode-select --install
 
 Homebrew
 --------
@@ -17,6 +19,15 @@ Install::
 
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     brew doctor
+
+.bash_profile
+-------------
+
+``~/.bash_profile`` is available on `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_
+
+Now activate it::
+
+    source ~/.bash_profile
 
 Bash
 ----
@@ -53,20 +64,6 @@ Output::
 
     Bash completion has been installed to:
       /usr/local/etc/bash_completion.d
-
-Add to your ``~/.bash_profile``::
-
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        . $(brew --prefix)/etc/bash_completion
-    fi
-
-You should also add (to enable colors in the shell)::
-
-    export CLICOLOR=1
-
-Now activate it::
-
-    source ~/.bash_profile
 
 wget
 ----
@@ -178,13 +175,13 @@ Output::
       /usr/local/share/zsh/site-functions
 
     cd ~/.ssh
-    ssh-keygen -t rsa -C "your_email@domain.com"
+    ssh-keygen -t rsa -C "typhoon.man@gmail.com"
     pbcopy < ~/.ssh/id_rsa.pub
 
 Set global git settings::
 
-    git config --global user.name "Full Name"
-    git config --global user.email "your_email@domain.com"
+    git config --global user.name "Alex Zagorodniuk"
+    git config --global user.email "typhoon.man@gmail.com"
     git config --global color.ui true
 
 SVN::
@@ -507,15 +504,16 @@ Image processing utils
 Homebrew maintenance
 --------------------
 
+Get a checkup from the doctor and follow the doctor's instructions::
+
+    brew doctor
+
 To update your installed brews::
 
     brew update
     brew outdated
     brew upgrade
-
-Get a checkup from the doctor and follow the doctor's instructions::
-
-    brew doctor
+    brew cleanup
 
 iTerm2
 ------
@@ -531,150 +529,6 @@ Google Chrome
 DevTools UI Theme::
 
     https://github.com/mauricecruz/chrome-devtools-zerodarkmatrix-theme
-
-.bash_profile
--------------
-
-``~/.bash_profile`` is available on `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_ and looks like::
-
-    HOMEBREW=/usr/local/sbin:/usr/local/bin
-    DOTFILES_BIN=$HOME/dotfiles/bin
-    RVM=$HOME/.rvm/gems/ruby-2.1.0/bin
-
-    PASSENGER_CONFIG=/usr/local/Cellar/passenger/4.0.33/libexec/lib/phusion_passenger/locations.ini
-
-    export PATH=$RVM:$PASSENGER_CONFIG:$HOMEBREW:$DOTFILES_BIN:/usr/local/share/npm/bin:$HOME/bin:$HOME/.rvm/bin:$PATH
-    export NODE_PATH="/usr/local/lib/node_modules"
-
-    # need for makara
-    export BPMAG_CONFIG_PATH=/Users/typhoon/projects/makara/config/local.cfg
-
-
-    # enable programmable completion features (you don't need to enable
-    # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-    # sources /etc/bash.bashrc).
-
-    if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-        . /etc/bash_completion
-    elif [ -f `brew --prefix`/etc/bash_completion ]; then
-        . `brew --prefix`/etc/bash_completion
-    fi
-
-    # django completion
-    if [ -f ~/.django/django_bash_completion ]; then
-       . ~/.django/django_bash_completion
-    fi
-
-
-    # pip completion
-    _pip_completion()
-    {
-       COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \
-                      COMP_CWORD=$COMP_CWORD \
-                      PIP_AUTO_COMPLETE=1 $1 ) )
-    }
-    complete -o default -F _pip_completion pip
-
-
-    # Terminal colors
-    export CLICOLOR=1
-    export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-
-
-    # Default Editor
-    # export EDITOR=/usr/bin/mate
-
-
-    # Bash format
-    # PS1="[\d \u@\s] ~/\W:"
-    PS1='\[\033[01;32m\]\u\[\033[01;34m\]::\[\033[01;31m\]\h \[\033[00;34m\]{ \[\033[01;34m\]\w \[\033[00;34m\]}\[\033[01;32m\] $(__git_ps1 "(%s)") -> \[\033[00m\]'
-
-
-    # Bash history remove dublicates
-    export HISTCONTROL=erasedups
-    export HISTSIZE=10000
-    shopt -s histappend
-
-
-    # check the window size after each command and, if necessary,
-    # update the values of LINES and COLUMNS.
-    shopt -s checkwinsize
-
-
-    # Alias definitions.
-
-    # You may want to put all your additions into a separate file like
-    # ~/.bash_aliases, instead of adding them here directly.
-    if [ -f ~/.bash_aliases ]; then
-        . ~/.bash_aliases
-    fi
-
-    # Bash shortcuts
-    alias ..='cd ..'
-    alias ll='ls -ahlF'
-    alias getip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2'
-    alias atom='. atom'
-
-    # Shortcut for activating a virtualenv (assumed to be in `pwd`/envs)
-    alias activate='. envs/bin/activate'
-
-    # useful cd shortcuts
-    alias envs='cd $HOME/envs'
-    alias projects='cd $HOME/projects'
-    alias lib='cd $HOME/Google\ Drive/Library'
-    alias sublpackages='cd $HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User'
-
-    # Removes all *.pyc from current directory and all subdirectories
-    alias pycclean='find . -name "*.pyc" -exec rm {} \;'
-
-    # Shortcut to determine your current PYTHONPATH, useful in debugging when switching between virtualenv’s
-    alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"'
-
-    # django management commands aliases
-    alias collectstatic='./manage.py collectstatic --noinput'
-    alias compress='./manage.py compress'
-    alias dbshell='./manage.py dbshell'
-    alias loaddata='./manage.py loaddata'
-    alias migrate='./manage.py migrate'
-    alias rebuild='./manage.py rebuild_index'
-    alias run='./manage.py runserver 0.0.0.0:8000'
-    alias schema='./manage.py schemamigration'
-    alias data='./manage.py datamigration'
-    alias shell='./manage.py shell_plus'
-    alias srun='./source/manage.py runserver 0.0.0.0:8000'
-    alias superuser='./manage.py createsuperuser'
-    alias syncdb='./manage.py syncdb'
-
-    # pyramid commands aliases
-    alias prun='pserve development.ini --reload'
-    alias pshell='pshell development.ini'
-
-    # Shortcut to symlink the xapian libs to your virtualenv
-    # (assumed to be in `pwd`/env)
-    alias lnxapian='ln -s /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/xapian envs/lib/python2.7/site-packages/. '
-
-    # crate new database from template
-    alias newdb='createdb -T template_postgis'
-    alias pgstart='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-    alias pgstop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-
-    # Server restart
-    alias reloadnginx='sudo /etc/init.d/nginx reload'
-    alias reloadmemcached='sudo /etc/init.d/memcached restart'
-    alias reloadapache='sudo /etc/init.d/apache2 reload'
-    alias reloadpostgres='sudo /etc/init.d/postgresql restart'
-    alias reloadservers='reloadnginx; reloadmemcached; reloadapache'
-
-    # Running realtime sass proccess for monitoring static files
-    alias runsass='sass --scss --watch core/static/scss:static/css'
-
-
-    # FU stuff
-    alias fuweb='cd ~/shared/fu-web;source ~/.virtualenvs/fu-web/bin/activate'
-    alias furun='python manage.py runserver 0.0.0.0:8000 --settings=fu_web.settings.development'
-
-    # Load RVM into a shell session *as a function*
-    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 Sublime3
 --------
@@ -714,119 +568,50 @@ Themes::
 
 Alternative themes are available at ``https://github.com/daylerees/colour-schemes``.
 
-
-Install with Sublime Package Control::
-
-    advancednewfile
-    apacheconf.tmlanguage
-    brackethighlighter
-    dayle rees color schemes
-    djaneiro
-    docblockr
-    emmet
-    gitgutter
-    gitignore
-    html5
-    hayaku
-    jsonlint
-    less
-    laravel blade highlighter
-    prefixr
-    pretty json
-    python flake8 lint
-    sass
-    scss
-    sidebarenhancements
-    sidebargit
-    slug
-    sublimecodeintel
-    sublimelinter
-    sublimelinter-jshint
-    sublimelinter-pep8
-    sublimelinter-php
-    theme - flatland
-    theme - spacegray
-    sublime-jinja2
-    sublime-jslint
-
-
-Settings - User::
+User settings, Key Bindings and most of the packages are synced via Google Drive but here is a list of packages::
 
     {
-        "auto_complete_commit_on_tab": true,
-        "auto_complete_selector": "source - comment, meta.tag - punctuation.definition.tag.begin",
-        "caret_style": "wide",
-        "color_scheme": "Packages/User/Monokai-Dark-Soda.tmTheme/Monokai Dark Soda.tmTheme",
-        "draw_white_space": "all",
-        "ensure_newline_at_eof_on_save": true,
-        "file_exclude_patterns":
+        "installed_packages":
         [
-            ".DS_Store",
-            "*.a",
-            "*.class",
-            "*.db",
-            "*.dll",
-            "*.dylib",
-            "*.exe",
-            "*.idb",
-            "*.lib",
-            "*.log",
-            "*.mp4",
-            "*.ncb",
-            "*.o",
-            "*.obj",
-            "*.ogv",
-            "*.otf",
-            "*.pdb",
-            "*.psd",
-            "*.pyc",
-            "*.pyo",
-            "*.sdf",
-            "*.so",
-            "*.sql",
-            "*.suo",
-            "*.ttf",
-            "*.webm"
-        ],
-        "folder_exclude_patterns":
-        [
-            "CACHE"
-        ],
-        "font_size": 12.0,
-        "highlight_modified_tabs": true,
-        "ignored_packages":
-        [
-            "Vintage"
-        ],
-        "indent_guide_options":
-        [
-            "draw_active"
-        ],
-        "indent_to_bracket": true,
-        "remember_open_files": false,
-        "rulers":
-        [
-            180
-        ],
-        "soda_classic_tabs": true,
-        "tab_size": 4,
-        "theme": "Soda Dark.sublime-theme",
-        "translate_tabs_to_spaces": true,
-        "trim_trailing_white_space_on_save": true,
-        "use_tab_stops": true,
-        "word_separators": "./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?",
-        "wrap_width": 180
+            "AdvancedNewFile",
+            "ApacheConf.tmLanguage",
+            "BracketHighlighter",
+            "Dayle Rees Color Schemes",
+            "Djaneiro",
+            "DocBlockr",
+            "Emmet",
+            "GitGutter",
+            "Gitignore",
+            "Gutter Color",
+            "Hayaku - tools for writing CSS faster",
+            "HTML5",
+            "Jinja2",
+            "JSONLint",
+            "Laravel Blade Highlighter",
+            "LESS",
+            "Less2Css",
+            "lessc",
+            "Pretty JSON",
+            "Python Flake8 Lint",
+            "Sass",
+            "SCSS",
+            "SideBarEnhancements",
+            "SideBarGit",
+            "Slug",
+            "SublimeCodeIntel",
+            "SublimeLinter",
+            "SublimeLinter-flake8",
+            "SublimeLinter-gjslint",
+            "SublimeLinter-jshint",
+            "SublimeLinter-json",
+            "SublimeLinter-pep8",
+            "SublimeLinter-php",
+            "SublimeLinter-rst",
+            "SublimePythonIDE",
+            "Syntax Highlighting for Sass",
+            "TernJS",
+            "Theme - Flatland",
+            "Theme - Spacegray"
+        ]
     }
 
-Key Bindings - User::
-
-    [
-        { "keys": ["super+k", "super+o"], "command": "swap_case" },
-        { "keys": ["super+k", "super+t"], "command": "title_case" },
-        { "keys": ["super+\\"], "command": "reindent" },
-        { "keys": ["ctrl+n"], "command": "side_bar_new_file2" },
-        { "keys": ["ctrl+shift+r"], "command": "side_bar_rename" },
-        { "keys": ["ctrl+shift+s"], "command": "slug" },
-        { "keys": ["super+v"], "command": "paste_and_indent" },
-        { "keys": ["super+shift+v"], "command": "paste" }
-    ]
