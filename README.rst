@@ -455,6 +455,36 @@ You need to symlink the libraries into your project's virtualenv site-packages::
     ln -s /usr/local/lib/python2.7/site-packages/xapian `pwd`/env/lib/python2.7/site-packages/
 
 
+Solr
+----
+
+Install::
+
+    brew install solr
+
+Output::
+
+    ==> Caveats
+    To start solr:
+      solr path/to/solr/config/dir
+
+    See the solr homepage for more setup information:
+      brew home solr
+
+    To have launchd start solr at login:
+        ln -sfv /usr/local/opt/solr/*.plist ~/Library/LaunchAgents
+    Then to load solr now:
+        launchctl load ~/Library/LaunchAgents/homebrew.mxcl.solr.plist
+    ==> Summary
+
+You need to copy the lang file::
+
+    cp /usr/local/Cellar/solr/X.X.X/libexec/example/solr/conf/lang/stopwords_en.txt /usr/local/Cellar/solr/X.X.X/libexec/example/solr/conf/.
+
+Now start solr::
+
+    java -jar /usr/local/Cellar/solr/X.X.X/libexec/example/start.jar
+
 Web Servers
 ===========
 
