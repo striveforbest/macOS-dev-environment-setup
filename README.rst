@@ -25,7 +25,7 @@ Install::
 
 ``~/.bash_profile`` is available on `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_
 
-Now activate it::
+Now link ``.bash_profile`` and ``bin`` and run::
 
     source ~/.bash_profile
 
@@ -614,4 +614,3 @@ User settings, Key Bindings and most of the packages are synced via Google Drive
             "Theme - Spacegray"
         ]
     }
-
