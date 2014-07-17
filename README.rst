@@ -529,7 +529,16 @@ https://github.com/coolwanglu/pdf2htmlEX
 Image processing utils
 ----------------------
 
-``brew install optipng jpegoptim pngcrush ImageMagick``
+``brew install freetype imagemagick jpegoptim lcms libjpeg libpng libtiff openjpeg optipng pngcrush webp``
+
+Install OpenJPEG::
+
+    wget http://downloads.sourceforge.net/project/openjpeg.mirror/2.1.0/openjpeg-2.1.0.tar.gz
+    tar xzvf openjpeg-2.1.0.tar.gz
+    cd openjpeg-2.1.0/
+    cmake .
+    make
+    sudo make install
 
 Homebrew maintenance
 --------------------
