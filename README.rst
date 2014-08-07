@@ -523,6 +523,18 @@ See https://github.com/Homebrew/homebrew-apache for more information.
 Miscellaneous tools
 ===================
 
+Cheat
+-----
+
+A tool to view/create cheatsheets for *nix commands. Install with easy_install/pip::
+
+    easy_install cheat
+
+Use::
+
+    cheat -l
+    cheat tar
+
 https://github.com/coolwanglu/pdf2htmlEX
 ``brew install pdf2htmlex``
 
