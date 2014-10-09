@@ -2,13 +2,13 @@
 Configuring OSX for Development
 ===============================
 
-This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX 10.9.x (Mavericks) with Xcode 5.1.x.
+This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX 10.9.x (Mavericks) with Xcode 6.0.x.
 
 Xcode
 -----
 
 Install Xcode from the App Store.
-Open Xcode and select ``Xcode -> Preferences -> Downloads -> Components`` and install Command Line Tools or do::
+Install Command Line Tools::
 
     xcode-select --install
 
@@ -17,7 +17,7 @@ Homebrew
 
 Install::
 
-    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew doctor
 
 .bash_profile
@@ -25,8 +25,11 @@ Install::
 
 ``~/.bash_profile`` is available on `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_
 
-Now link ``.bash_profile`` and ``bin`` and run::
+Now link ``.bash_profile`` and ``bin``::
 
+    cd
+    ln -s /path/to/dotfiles_repo/.bash_profile
+    ln -s /path/to/dotfiles_repo/bin
     source ~/.bash_profile
 
 Bash
@@ -107,11 +110,6 @@ iPython/iPDB::
     easy_install readline
     sudo pip install ipython ipdb
 
-iPython notebook (install zeromq first, see directions below)::
-
-    sudo pip install pyzmq tornado Jinja2
-
-
 Django bash completion::
 
     mkdir ~/.django
@@ -184,6 +182,23 @@ Set global git settings::
     git config --global user.email "typhoon.man@gmail.com"
     git config --global color.ui true
 
+Add git aliases and default settings to ``~/.gitconfig``::
+
+    [alias]
+        co = checkout
+        ci = commit
+        st = status
+        br = branch
+        hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+        type = cat-file -t
+        dump = cat-file -p
+
+    [push]
+        default = matching
+
+    [merge]
+        ff = true
+
 SVN::
 
     brew install svn
@@ -228,15 +243,6 @@ Output::
         launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
     Or, if you don't want/need launchctl, you can just run:
         pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
-
-If you get shared memory error, do next::
-
-    sudo sysctl -w kern.sysv.shmall=65536
-    sudo sysctl -w kern.sysv.shmmax=16777216
-
-    And add following to /etc/sysctl.conf (if file doesn’t exist, create it):
-    kern.sysv.shmall=65536
-    kern.sysv.shmmax=16777216
 
 Related spatial libraries::
 
