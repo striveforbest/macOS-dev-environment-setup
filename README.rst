@@ -2,7 +2,7 @@
 Configuring OSX for Development
 ===============================
 
-This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX 10.9.x (Mavericks) with Xcode 6.0.x.
+This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX 10.10.x (Yosemite) with Xcode 6.1.x.
 
 Xcode
 -----
@@ -103,12 +103,12 @@ pip::
 
 virtualenv::
 
-    sudo pip install virtualenv
+    easy_install virtualenv
 
 iPython/iPDB::
 
     easy_install readline
-    sudo pip install ipython ipdb
+    easy_install ipython ipdb
 
 Django bash completion::
 
@@ -219,34 +219,24 @@ Output::
     ==> Caveats
     If builds of PostgreSQL 9 are failing and you have version 8.x installed,
     you may need to remove the previous version first. See:
-      https://github.com/mxcl/homebrew/issues/issue/2510
+      https://github.com/Homebrew/homebrew/issues/issue/2510
 
+    To migrate existing data from a previous major version (pre-9.3) of PostgreSQL, see:
+      http://www.postgresql.org/docs/9.3/static/upgrading.html
 
-    If this is your first install, create a database with:
-      initdb /usr/local/var/postgres -E utf8
-
-
-    To migrate existing data from a previous major version (pre-9.2) of PostgreSQL, see:
-      http://www.postgresql.org/docs/9.2/static/upgrading.html
-
-
-    Some machines may require provisioning of shared memory:
-      http://www.postgresql.org/docs/9.2/static/kernel-resources.html#SYSVIPC
     When installing the postgres gem, including ARCHFLAGS is recommended:
       ARCHFLAGS="-arch x86_64" gem install pg
 
     To install gems without sudo, see the Homebrew wiki.
 
-    To have launchd start postgresql at login:
-        ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-    Then to load postgresql now:
+    To load postgresql:
         launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
     Or, if you don't want/need launchctl, you can just run:
-        pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+        postgres -D /usr/local/var/postgres
 
 Related spatial libraries::
 
-    pip install numpy
+    easy_install numpy
     brew install gdal geos
 
 PostGIS::
@@ -547,8 +537,10 @@ https://github.com/coolwanglu/pdf2htmlEX
 Image processing utils
 ----------------------
 
-``brew install imagemagick --with-jp2``
-``brew install freetype graphicsmagick jpegoptim lcms libjpeg libpng libtiff openjpeg optipng pngcrush webp``
+Install for full support of PIL/Pillow::
+
+    brew install imagemagick --with-jp2
+    brew install freetype graphicsmagick jpegoptim lcms libjpeg libpng libtiff openjpeg optipng pngcrush webp
 
 Homebrew maintenance
 --------------------
