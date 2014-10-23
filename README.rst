@@ -456,7 +456,7 @@ Solr
 
 Install::
 
-    brew install solr
+    brew install solr36
 
 Output::
 
@@ -467,11 +467,10 @@ Output::
     See the solr homepage for more setup information:
       brew home solr
 
-    To have launchd start solr at login:
-        ln -sfv /usr/local/opt/solr/*.plist ~/Library/LaunchAgents
-    Then to load solr now:
-        launchctl load ~/Library/LaunchAgents/homebrew.mxcl.solr.plist
-    ==> Summary
+    To have launchd start solr36 at login:
+        ln -sfv /usr/local/opt/solr36/*.plist ~/Library/LaunchAgents
+    Then to load solr36 now:
+        launchctl load ~/Library/LaunchAgents/homebrew.mxcl.solr36.plist
 
 You need to copy the lang file::
 
