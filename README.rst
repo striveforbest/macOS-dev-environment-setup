@@ -84,6 +84,10 @@ OSX's default ``rsync`` is old and dumb. Replace it::
     brew install rsync
     brew untap homebrew/dupes
 
+s3cmd
+-----
+
+``brew install s3cmd``
 
 Programming Languages & Web Frameworks
 ======================================
