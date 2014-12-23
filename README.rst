@@ -198,7 +198,7 @@ Add git aliases and default settings to ``~/.gitconfig``::
         dump = cat-file -p
 
     [push]
-        default = matching
+        default = simple
 
     [merge]
         ff = true
