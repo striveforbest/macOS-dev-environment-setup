@@ -144,7 +144,7 @@ Node::
 
 Npm::
 
-    curl https://npmjs.org/install.sh | sh
+    curl -L https://npmjs.org/install.sh | sh
 
 Less::
 
@@ -214,87 +214,7 @@ Data Stores
 PostgreSQL
 ----------
 
-Install::
-
-    brew install postgres
-
-Output::
-
-    ==> Caveats
-    If builds of PostgreSQL 9 are failing and you have version 8.x installed,
-    you may need to remove the previous version first. See:
-      https://github.com/Homebrew/homebrew/issues/issue/2510
-
-    To migrate existing data from a previous major version (pre-9.3) of PostgreSQL, see:
-      http://www.postgresql.org/docs/9.3/static/upgrading.html
-
-    When installing the postgres gem, including ARCHFLAGS is recommended:
-      ARCHFLAGS="-arch x86_64" gem install pg
-
-    To install gems without sudo, see the Homebrew wiki.
-
-    To load postgresql:
-        launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-    Or, if you don't want/need launchctl, you can just run:
-        postgres -D /usr/local/var/postgres
-
-Related spatial libraries::
-
-    easy_install numpy
-    brew install gdal geos
-
-PostGIS::
-
-    brew install postgis
-
-Output::
-
-    ==> Caveats
-    To create a spatially-enabled database, see the documentation:
-      http://postgis.refractions.net/documentation/manual-2.0/postgis_installation.html#create_new_db_extensions
-    and to upgrade your existing spatial databases, see here:
-      http://postgis.refractions.net/documentation/manual-2.0/postgis_installation.html#upgrading
-
-    PostGIS SQL scripts installed to:
-      /usr/local/share/postgis
-    PostGIS plugin libraries installed to:
-      /usr/local/opt/postgresql/lib
-    PostGIS extension modules installed to:
-      /usr/local/opt/postgresql/share/postgresql/extension
-
-To create a database instance::
-
-    initdb /usr/local/var/postgres -E utf8
-
-You can now start the database server using::
-
-    pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
-
-Or to set it to start automatically, see the output above after installing postgresql.
-
-Create the spatially enabled template::
-
-    createdb template_postgis
-    psql -f /usr/local/share/postgis/postgis.sql template_postgis
-    psql -f /usr/local/share/postgis/spatial_ref_sys.sql template_postgis
-
-Create users::
-
-    createuser -s web
-
-To create a spatially enabled database::
-
-    createdb -T template_postgis mydbname
-
-If you are getting Permission Denied error, run::
-
-    curl http://nextmarvel.net/blog/downloads/fixBrewLionPostgres.sh | sh
-
-    psql -f /usr/local/share/postgis/postgis.sql template_postgis
-    psql -f /usr/local/share/postgis/spatial_ref_sys.sql template_postgis
-    psql -d template_postgis -c "GRANT ALL ON geometry_columns TO PUBLIC;"
-    psql -d template_postgis -c "GRANT ALL ON geography_columns TO PUBLIC;"
-    psql -d template_postgis -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;"
+Just download and install Postgres.app from http://postgresapp.com/ (which comes with Postgis)
 
 
 MySQL
