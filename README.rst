@@ -102,7 +102,6 @@ Homebrew installs pip and distribute by default when installing Python::
 pip::
 
     sudo pip install --upgrade setuptools
-    sudo pip install --upgrade distribute
     sudo pip install --upgrade pip
 
 virtualenv::
