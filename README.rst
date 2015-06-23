@@ -99,6 +99,10 @@ Homebrew installs pip and distribute by default when installing Python::
 
     brew install python --framework
 
+pyenv::
+
+    brew install pyenv
+
 pip::
 
     sudo pip install --upgrade setuptools
