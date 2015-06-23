@@ -102,6 +102,7 @@ Homebrew installs pip and distribute by default when installing Python::
 pyenv::
 
     brew install pyenv
+    brew install pyenv-virtualenv
 
 pip::
 
