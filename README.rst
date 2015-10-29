@@ -200,6 +200,7 @@ Add git aliases and default settings to ``~/.gitconfig``::
         hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
         type = cat-file -t
         dump = cat-file -p
+        delremotebranch = push origin --delete
 
     [push]
         default = simple
