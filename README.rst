@@ -447,6 +447,13 @@ See https://github.com/Homebrew/homebrew-apache for more information.
 Miscellaneous tools
 ===================
 
+Htop
+----
+
+A tool to display all running processes::
+
+    brew install htop
+
 Cheat
 -----
 
