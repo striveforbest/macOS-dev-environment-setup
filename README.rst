@@ -447,6 +447,20 @@ See https://github.com/Homebrew/homebrew-apache for more information.
 Miscellaneous tools
 ===================
 
+JQ
+--
+
+jq is a tool for processing JSON inputs, applying the given filter to its JSON text inputs and producing the filter's results as JSON on standard output.
+
+    brew install jq
+
+Vault
+-----
+
+Vault is a tool for securely accessing secrets. `Documentaion <https://www.vaultproject.io/intro/index.html>`_
+
+    brew install vault
+
 Htop
 ----
 
