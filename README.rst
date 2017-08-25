@@ -2,7 +2,7 @@
 Configuring OSX for Development
 ===============================
 
-This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX 10.10.x (Yosemite) with Xcode 6.1.x.
+This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX 10.12.x (Yosemite) with Xcode 8.3.x.
 
 Xcode
 -----
@@ -20,17 +20,7 @@ Install::
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew doctor
 
-.bash_profile
--------------
-
-``~/.bash_profile`` is available on `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_
-
-Now link ``.bash_profile`` and ``bin``::
-
-    cd
-    ln -s /path/to/dotfiles_repo/.bash_profile
-    ln -s /path/to/dotfiles_repo/bin
-    source ~/.bash_profile
+You can use either `bash` or `zshell`, your choice.
 
 Bash
 ----
@@ -46,6 +36,18 @@ Update the default shell::
 Add the path to the shell you want to use if not already present, then set it::
 
     chsh -s /usr/local/bin/bash
+
+.bash_profile
+-------------
+
+``~/.bash_profile`` is available on `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_
+
+Now link ``.bash_profile`` and ``bin``::
+
+    cd
+    ln -s /path/to/dotfiles_repo/.bash_profile
+    ln -s /path/to/dotfiles_repo/bin
+    source ~/.bash_profile
 
 Bash completion
 ---------------
@@ -67,6 +69,63 @@ Output::
 
     Bash completion has been installed to:
       /usr/local/etc/bash_completion.d
+
+Z shell
+-------
+
+Install::
+
+    brew install zsh zsh-completions zsh-autosuggestions zsh-syntax-highlighting
+
+Output::
+
+    ==> Caveats
+    To activate these completions, add the following to your .zshrc:
+
+      fpath=(/usr/local/share/zsh-completions $fpath)
+
+    You may also need to force rebuild `zcompdump`:
+
+      rm -f ~/.zcompdump; compinit
+
+    Additionally, if you receive "zsh compinit: insecure directories" warnings when attempting
+    to load these completions, you may need to run this:
+
+      chmod go-w '/usr/local/share'
+
+Oh My Zsh
+---------
+
+Oh My Zsh is an open source, community-driven framework for managing your zsh configuration. `Instructions <https://github.com/robbyrussell/oh-my-zsh>`_
+
+Install::
+
+    sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+powerlevel9k
+------------
+
+Oh My Zsh theme. `Instructions <https://github.com/bhilburn/powerlevel9k/wiki/Install-Instructions#option-2-install-for-oh-my-zsh>`_
+
+Install::
+
+    git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+
+You will need the custom powerline fonts. Instructions `<https://github.com/bhilburn/powerlevel9k/wiki/Install-Instructions#step-2-install-a-powerline-font>`_
+I use `Meslo LG S DZ Regular for Powerline` from this `repository <https://github.com/powerline/fonts>`_
+Keep in mind, you'll need to set the fonts in your `iTerm` Settings -> Profiles -> Text
+
+.zshrc
+------
+
+``~/.zshrc`` is available on `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_
+
+Now link ``.zshrc`` and ``bin``::
+
+    cd
+    ln -s /path/to/dotfiles_repo/.zshrc
+    ln -s /path/to/dotfiles_repo/bin
+    source ~/.zshrc
 
 wget
 ----
@@ -101,17 +160,16 @@ Homebrew installs pip and distribute by default when installing Python::
 
 pyenv::
 
-    brew install pyenv
-    brew install pyenv-virtualenv
+    brew install pyenv pyenv-virtualenv pyenv-virtualenvwrapper
 
 pip::
 
     sudo pip install --upgrade setuptools
     sudo pip install --upgrade pip
 
-virtualenv::
+virtualenvwrapper::
 
-    easy_install virtualenv
+    easy_install virtualenvwrapper
 
 iPython/iPDB::
 
@@ -138,6 +196,9 @@ This installs both Ruby and Rails in one go::
 
     \curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enabled
 
+Frontend Tools
+--------------
+
 Sass::
 
     gem install sass
@@ -148,11 +209,15 @@ Node::
 
 Npm::
 
-    curl -L https://npmjs.org/install.sh | sh
+    npm install npm -g
 
 Less::
 
-    npm install -g less
+    npm install less -g
+
+Bower::
+
+    npm install bower -g
 
 Version Control
 ===============
@@ -334,21 +399,6 @@ Output::
     Or, if you don't want/need launchctl, you can just run:
         rabbitmq-server
 
-ZeroMQ
-------
-
-Install::
-
-    brew install zeromq
-
-Output::
-
-    ==> Caveats
-    To install the zmq gem on 10.6 with the system Ruby on a 64-bit machine,
-    you may need to do:
-
-    ARCHFLAGS="-arch x86_64" gem install zmq -- --with-zmq-dir=/usr/local/opt/zeromq
-
 Celery
 ------
 
@@ -368,46 +418,17 @@ To configure your Django project to work with Celery/RabbitMQ, see http://docs.c
 Search Engine Backends
 ======================
 
-Xapian
-------
+ElasticSearch
+-------------
 
 Install::
 
-    brew install xapian --python
+    brew install elasticsearch
 
-You need to symlink the libraries into your project's virtualenv site-packages::
+Run in on system start::
 
-    ln -s /usr/local/lib/python2.7/site-packages/xapian `pwd`/env/lib/python2.7/site-packages/
+    brew services start elasticsearch
 
-
-Solr
-----
-
-Install::
-
-    brew install solr36
-
-Output::
-
-    ==> Caveats
-    To start solr:
-      solr path/to/solr/config/dir
-
-    See the solr homepage for more setup information:
-      brew home solr
-
-    To have launchd start solr36 at login:
-        ln -sfv /usr/local/opt/solr36/*.plist ~/Library/LaunchAgents
-    Then to load solr36 now:
-        launchctl load ~/Library/LaunchAgents/homebrew.mxcl.solr36.plist
-
-You need to copy the lang file::
-
-    cp /usr/local/Cellar/solr/X.X.X/libexec/example/solr/conf/lang/stopwords_en.txt /usr/local/Cellar/solr/X.X.X/libexec/example/solr/conf/.
-
-Now start solr::
-
-    java -jar /usr/local/Cellar/solr/X.X.X/libexec/example/start.jar
 
 Web Servers
 ===========
