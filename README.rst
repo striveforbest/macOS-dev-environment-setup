@@ -31,13 +31,25 @@ Install::
 
 Update the default shell::
 
-    sudo vi /etc/shells
+    sudo vim /etc/shells
+
+Paste in above all other entires::
+
+    /usr/local/bin/bash
+
 
 Add the path to the shell you want to use if not already present, then set it::
 
     chsh -s /usr/local/bin/bash
 
-.bash_profile
+wget
+----
+
+Handy to have in general (especially if you're copy/paste-ing someone else's commands... like below in this very document)::
+
+    brew install wget
+
+.bash_profile (If using Z Shell, skip to `here <https://github.com/StriveForBest/osx-dev-environment-setup#z-shell>`_).
 -------------
 
 ``~/.bash_profile`` is available on `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_
@@ -109,11 +121,14 @@ Oh My Zsh theme. `Instructions <https://github.com/bhilburn/powerlevel9k/wiki/In
 
 Install::
 
-    git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+    git clone git@github.com:bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 
-You will need the custom powerline fonts. Instructions `<https://github.com/bhilburn/powerlevel9k/wiki/Install-Instructions#step-2-install-a-powerline-font>`_
-I use `Meslo LG S DZ Regular for Powerline` from this `repository <https://github.com/powerline/fonts>`_
-Keep in mind, you'll need to set the fonts in your `iTerm` Settings -> Profiles -> Text
+Install powerline `fonts <https://github.com/powerline/fonts>`_::
+    git clone git@github.com:powerline/fonts.git  ~/.oh-my-zsh/custom/fonts
+    cd ~/.oh-my-zsh/custom/fonts
+    ./install.sh
+
+Keep in mind, you'll need to set the fonts in your `iTerm` Settings -> Profiles -> Text -> Change Font -> Meslo LG S DZ Regular for Powerline.
 
 .zshrc
 ------
@@ -127,21 +142,12 @@ Now link ``.zshrc`` and ``bin``::
     ln -s /path/to/dotfiles_repo/bin
     source ~/.zshrc
 
-wget
-----
-
-Handy to have in general (especially if you're copy/paste-ing someone else's commands... like below in this very document)::
-
-    brew install wget
-
 rsync
 -----
 
 OSX's default ``rsync`` is old and dumb. Replace it::
 
-    brew tap homebrew/dupes
     brew install rsync
-    brew untap homebrew/dupes
 
 s3cmd
 -----
@@ -156,7 +162,7 @@ Python
 
 Homebrew installs pip and distribute by default when installing Python::
 
-    brew install python --framework
+    brew install python@2
 
 pyenv::
 
@@ -164,19 +170,18 @@ pyenv::
 
 pip::
 
-    sudo pip install --upgrade setuptools
-    sudo pip install --upgrade pip
+    pip install --upgrade setuptools
+    pip install --upgrade pip
 
 virtualenvwrapper::
 
-    easy_install virtualenvwrapper
+    pip install virtualenvwrapper
 
 iPython/iPDB::
 
-    easy_install readline
-    easy_install ipython ipdb
+    pip install readline ipython ipdb
 
-Django bash completion::
+Django bash completion (Z Shell users can skip)::
 
     mkdir ~/.django
 
@@ -199,10 +204,6 @@ This installs both Ruby and Rails in one go::
 Frontend Tools
 --------------
 
-Sass::
-
-    gem install sass
-
 Node::
 
     brew install node
@@ -210,6 +211,10 @@ Node::
 Npm::
 
     npm install npm -g
+
+Npm-X (makes commands from local environment available)::
+
+    npm install npx -g
 
 Less::
 
@@ -246,13 +251,13 @@ Output::
       /usr/local/share/zsh/site-functions
 
     cd ~/.ssh
-    ssh-keygen -t rsa -C "typhoon.man@gmail.com"
+    ssh-keygen -t rsa -C "alex.zagoro@eagerminds.nyc"
     pbcopy < ~/.ssh/id_rsa.pub
 
 Set global git settings::
 
-    git config --global user.name "Alex Zagorodniuk"
-    git config --global user.email "typhoon.man@gmail.com"
+    git config --global user.name "Alex Zagor"
+    git config --global user.email "alex.zagoro@eagerminds.nyc"
     git config --global color.ui true
 
 Add git aliases and default settings to ``~/.gitconfig``::
@@ -272,6 +277,10 @@ Add git aliases and default settings to ``~/.gitconfig``::
 
     [merge]
         ff = true
+
+Git Flow::
+
+    brew install git-flow
 
 SVN::
 
@@ -374,47 +383,6 @@ Output::
         /usr/local/opt/memcached/bin/memcached
 
 
-Task Queues
-===========
-
-Rabbit MQ
----------
-
-Install::
-
-    brew install rabbitmq
-
-Output::
-
-    ==> Caveats
-    Management Plugin enabled by default at http://localhost:15672
-
-    Bash completion has been installed to:
-      /usr/local/etc/bash_completion.d
-
-    To have launchd start rabbitmq at login:
-        ln -sfv /usr/local/opt/rabbitmq/*.plist ~/Library/LaunchAgents
-    Then to load rabbitmq now:
-        launchctl load ~/Library/LaunchAgents/homebrew.mxcl.rabbitmq.plist
-    Or, if you don't want/need launchctl, you can just run:
-        rabbitmq-server
-
-Celery
-------
-
-Homepage => https://github.com/celery/django-celery/
-
-Install::
-
-    pip install -U Celery
-
-To run::
-
-    ./manage.py celeryd
-
-To configure your Django project to work with Celery/RabbitMQ, see http://docs.celeryproject.org/en/latest/getting-started/brokers/rabbitmq.html
-
-
 Search Engine Backends
 ======================
 
@@ -501,9 +469,6 @@ Use::
     cheat -l
     cheat tar
 
-https://github.com/coolwanglu/pdf2htmlEX
-``brew install pdf2htmlex``
-
 Image processing utils
 ----------------------
 
@@ -533,13 +498,6 @@ Themes::
 
     git@github.com:baskerville/iTerm-2-Color-Themes.git
     https://github.com/kevintuhumury/osx-settings/tree/master/iterm2
-
-Google Chrome
--------------
-
-DevTools UI Theme::
-
-    https://github.com/mauricecruz/chrome-devtools-zerodarkmatrix-theme
 
 Sublime3
 --------
