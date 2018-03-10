@@ -295,6 +295,10 @@ PostgreSQL
 
 Just download and install Postgres.app from http://postgresapp.com/ (which comes with Postgis)
 
+Enable CLI::
+
+	sudo mkdir -p /etc/paths.d && echo /Applications/Postgres.app/Contents/Versions/latest/bin | sudo tee /etc/paths.d/postgresapp
+
 
 MySQL
 -----
