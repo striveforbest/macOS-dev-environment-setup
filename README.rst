@@ -481,6 +481,18 @@ Install for full support of PIL/Pillow::
     brew install imagemagick --with-jp2
     brew install freetype graphicsmagick jpegoptim lcms libjpeg libpng libtiff openjpeg optipng pngcrush webp
 
+Vide processing utils
+---------------------
+
+FFmpeg::
+
+	brew install ffmpeg --with-fdk-aac --with-tools --with-theora –-with-openssl --with-openjpeg --with-libvpx  --with-libvorbis --with-libass --with-freetype --with-fdk-aac
+
+To see a full list of FFmpeg options::
+
+	brew options ffmpeg
+
+
 Homebrew maintenance
 --------------------
 
