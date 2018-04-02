@@ -473,6 +473,13 @@ Use::
     cheat -l
     cheat tar
 
+Fortune
+-------
+
+Some fortune telling wouldn't hurt::
+
+    brew install fortune
+
 Image processing utils
 ----------------------
 
