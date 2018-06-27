@@ -50,7 +50,7 @@ Handy to have in general (especially if you're copy/paste-ing someone else's com
     brew install wget
 
 .bash_profile (If using Z Shell, skip to `here <https://github.com/StriveForBest/osx-dev-environment-setup#z-shell>`_).
--------------
+-----------------------------------------------------------------------------------------------------------------------
 
 ``~/.bash_profile`` is available on `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_
 
@@ -281,6 +281,11 @@ Add git aliases and default settings to ``~/.gitconfig``::
 Git Flow::
 
     brew install git-flow
+
+GPG Signing::
+
+    There are many ways of installing GPG client, the easiest one is via Homebrew or `GPG Suite <https://gpgtools.org/>`_.
+    After generating the key, add it in `Github settings <https://github.com/settings/keys>`_ and then follow this `article <https://help.github.com/articles/telling-git-about-your-gpg-key/`_ to tell GPG about your key.
 
 SVN::
 
@@ -606,3 +611,4 @@ User settings, Key Bindings and most of the packages are synced via Google Drive
             "Theme - Spacegray"
         ]
     }
+
