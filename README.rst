@@ -17,7 +17,7 @@ Homebrew
 
 Install::
 
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew doctor
 
 You can use either `bash` or `zshell`, your choice.
@@ -187,20 +187,6 @@ Django bash completion (Z Shell users can skip)::
 
     wget --no-check-certificate https://raw.github.com/django/django/c09f6ff0a58d016eeb7536f1df1fa956f94f671c/extras/django_bash_completion -O ~/.django/django_bash_completion
 
-Ruby & Rails
-------------
-
-Install ruby gems without sudo::
-
-    sudo gem update --system
-    sudo chown -R $USER /Library/Ruby /Library/Perl /Library/Python
-
-    echo "gem: -n/usr/local/bin" >> ~/.gemrc
-
-This installs both Ruby and Rails in one go::
-
-    \curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enabled
-
 Frontend Tools
 --------------
 
@@ -227,10 +213,6 @@ Bower::
 Version Control
 ===============
 
-Mercurial::
-
-    brew install mercurial
-
 Git::
 
     brew install git
@@ -256,41 +238,14 @@ Output::
 
 Set global git settings::
 
-    git config --global user.name "Alex Zagor"
+    git config --global user.name "Alex Zagoro"
     git config --global user.email "alex.zagoro@eagerminds.nyc"
     git config --global color.ui true
-
-Add git aliases and default settings to ``~/.gitconfig``::
-
-    [alias]
-        co = checkout
-        ci = commit
-        st = status
-        br = branch
-        hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-        type = cat-file -t
-        dump = cat-file -p
-        delremotebranch = push origin --delete
-
-    [push]
-        default = simple
-
-    [merge]
-        ff = true
-
-Git Flow::
-
-    brew install git-flow
 
 GPG Signing::
 
     There are many ways of installing GPG client, the easiest one is via Homebrew or `GPG Suite <https://gpgtools.org/>`_.
     After generating the key, add it in `Github settings <https://github.com/settings/keys>`_ and then follow this `article <https://help.github.com/articles/telling-git-about-your-gpg-key/`_ to tell GPG about your key.
-
-SVN::
-
-    brew install svn
-
 
 Data Stores
 ===========
@@ -298,7 +253,7 @@ Data Stores
 PostgreSQL
 ----------
 
-Just download and install Postgres.app from http://postgresapp.com/ (which comes with Postgis)
+Just download and install Postgres.app from https://postgresapp.com/ (which comes with Postgis)
 
 Enable CLI::
 
@@ -490,19 +445,19 @@ Image processing utils
 
 Install for full support of PIL/Pillow::
 
-    brew install imagemagick --with-jp2
+    brew install imagemagick
     brew install freetype graphicsmagick jpegoptim lcms libjpeg libpng libtiff openjpeg optipng pngcrush webp
 
-Vide processing utils
+Video processing utils
 ---------------------
 
 FFmpeg::
 
-	brew install ffmpeg --with-fdk-aac --with-tools --with-theora –-with-openssl --with-openjpeg --with-libvpx  --with-libvorbis --with-libass --with-freetype --with-fdk-aac
+    brew install ffmpeg --with-fdk-aac --with-tools --with-theora –-with-openssl --with-openjpeg --with-libvpx  --with-libvorbis --with-libass --with-freetype --with-fdk-aac
 
 To see a full list of FFmpeg options::
 
-	brew options ffmpeg
+    brew options ffmpeg
 
 
 Homebrew maintenance
