@@ -45,42 +45,9 @@ Add the path to the shell you want to use if not already present, then set it::
 wget
 ----
 
-Handy to have in general (especially if you're copy/paste-ing someone else's commands... like below in this very document)::
-
-    brew install wget
-
-.bash_profile (If using Z Shell, skip to `here <https://github.com/StriveForBest/osx-dev-environment-setup#z-shell>`_).
------------------------------------------------------------------------------------------------------------------------
-
-``~/.bash_profile`` is available on `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_
-
-Now link ``.bash_profile`` and ``bin``::
-
-    cd
-    ln -s /path/to/dotfiles_repo/.bash_profile
-    ln -s /path/to/dotfiles_repo/bin
-    source ~/.bash_profile
-
-Bash completion
----------------
-
 Install::
 
-    brew install bash-completion
-
-Output::
-
-    ==> Caveats
-    Add the following lines to your ~/.bash_profile:
-      if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        . $(brew --prefix)/etc/bash_completion
-      fi
-
-    Homebrew's own bash completion script has been installed to
-      /usr/local/etc/bash_completion.d
-
-    Bash completion has been installed to:
-      /usr/local/etc/bash_completion.d
+    brew install wget
 
 Z shell
 -------
@@ -124,6 +91,7 @@ Install::
     git clone git@github.com:bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 
 Install powerline `fonts <https://github.com/powerline/fonts>`_::
+
     git clone git@github.com:powerline/fonts.git  ~/.oh-my-zsh/custom/fonts
     cd ~/.oh-my-zsh/custom/fonts
     ./install.sh
@@ -162,9 +130,9 @@ Python
 
 Homebrew installs pip and distribute by default when installing Python::
 
-    brew install python@2
+    brew install python
 
-pyenv::
+pyenv (optional)::
 
     brew install pyenv pyenv-virtualenv pyenv-virtualenvwrapper
 
@@ -176,16 +144,6 @@ pip::
 virtualenvwrapper::
 
     pip install virtualenvwrapper
-
-iPython/iPDB::
-
-    pip install readline ipython ipdb
-
-Django bash completion (Z Shell users can skip)::
-
-    mkdir ~/.django
-
-    wget --no-check-certificate https://raw.github.com/django/django/c09f6ff0a58d016eeb7536f1df1fa956f94f671c/extras/django_bash_completion -O ~/.django/django_bash_completion
 
 Frontend Tools
 --------------
@@ -201,14 +159,6 @@ Npm::
 Npm-X (makes commands from local environment available)::
 
     npm install npx -g
-
-Less::
-
-    npm install less -g
-
-Bower::
-
-    npm install bower -g
 
 Version Control
 ===============
@@ -390,13 +340,6 @@ Output::
     Then to load nginx now:
         launchctl load ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist
 
-Apache
-------
-
-Homebrew relies on the supplied OSX version of Apache, it just adds modules to it from a tap.
-See https://github.com/Homebrew/homebrew-apache for more information.
-
-
 Miscellaneous tools
 ===================
 
@@ -453,8 +396,8 @@ Video processing utils
 
 FFmpeg::
 
-    brew install ffmpeg --with-fdk-aac --with-tools --with-theora –-with-openssl --with-openjpeg --with-libvpx  --with-libvorbis --with-libass --with-freetype --with-fdk-aac
-
+    brew install ffmpeg
+    
 To see a full list of FFmpeg options::
 
     brew options ffmpeg
@@ -473,97 +416,3 @@ To update your installed brews::
     brew outdated
     brew upgrade
     brew cleanup
-
-iTerm2
-------
-
-Themes::
-
-    git@github.com:baskerville/iTerm-2-Color-Themes.git
-    https://github.com/kevintuhumury/osx-settings/tree/master/iterm2
-
-Sublime3
---------
-
-Open Sublime3 from Terminal::
-
-    ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
-
-Sync Sublime3 Packages using Google Drive::
-
-First Machine::
-
-    cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-    mkdir -p ~/Google\ Drive/Install/sublime3
-    mv User ~/Google\ Drive/Install/sublime3/
-    ln -s ~/Google\ Drive/Install/sublime3/User
-
-Other Machine(s)::
-
-    cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-    rm -r User
-    ln -s ~/Google\ Drive/Install/sublime3/User
-
-Install Package Control::
-
-Open Sublime console ``ctrl+``` and paste::
-
-    import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
-
-Themes::
-
-    cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-    git clone https://github.com/mrlundis/Monokai-Dark-Soda.tmTheme
-
-    cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-    git clone https://github.com/buymeasoda/soda-theme/ "Theme - Soda"
-
-Alternative themes are available at ``https://github.com/daylerees/colour-schemes``.
-
-User settings, Key Bindings and most of the packages are synced via Google Drive but here is a list of packages::
-
-    {
-        "installed_packages":
-        [
-            "AdvancedNewFile",
-            "ApacheConf.tmLanguage",
-            "BracketHighlighter",
-            "Dayle Rees Color Schemes",
-            "Djaneiro",
-            "DocBlockr",
-            "Emmet",
-            "GitGutter",
-            "Gitignore",
-            "Gutter Color",
-            "Hayaku - tools for writing CSS faster",
-            "HTML5",
-            "Jinja2",
-            "JSONLint",
-            "Laravel Blade Highlighter",
-            "LESS",
-            "Less2Css",
-            "lessc",
-            "Pretty JSON",
-            "Python Flake8 Lint",
-            "Sass",
-            "SCSS",
-            "SideBarEnhancements",
-            "SideBarGit",
-            "Slug",
-            "SublimeCodeIntel",
-            "SublimeLinter",
-            "SublimeLinter-flake8",
-            "SublimeLinter-gjslint",
-            "SublimeLinter-jshint",
-            "SublimeLinter-json",
-            "SublimeLinter-pep8",
-            "SublimeLinter-php",
-            "SublimeLinter-rst",
-            "SublimePythonIDE",
-            "Syntax Highlighting for Sass",
-            "TernJS",
-            "Theme - Flatland",
-            "Theme - Spacegray"
-        ]
-    }
-
