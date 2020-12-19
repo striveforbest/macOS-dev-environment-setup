@@ -257,6 +257,11 @@ Zlib
 
     brew install zlib
 
+OpenSSL
+----
+
+    brew install openssl
+    
 JQ
 --
 
