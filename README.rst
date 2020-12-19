@@ -22,6 +22,43 @@ Install::
 
 You can use either `bash` or `zshell`, your choice.
 
+Version Control
+===============
+
+Git::
+
+    brew install git
+
+Output::
+
+    ==> Caveats
+    The OS X keychain credential helper has been installed to:
+      /usr/local/bin/git-credential-osxkeychain
+
+    The 'contrib' directory has been installed to:
+      /usr/local/share/git-core/contrib
+
+    Bash completion has been installed to:
+      /usr/local/etc/bash_completion.d
+
+    zsh completion has been installed to:
+      /usr/local/share/zsh/site-functions
+
+    cd ~/.ssh
+    ssh-keygen -t rsa -C "alex.zagoro@eagerminds.nyc"
+    pbcopy < ~/.ssh/id_rsa.pub
+
+Set global git settings::
+
+    git config --global user.name "Alex Zagoro"
+    git config --global user.email "alex.zagoro@eagerminds.nyc"
+    git config --global color.ui true
+
+GPG Signing::
+
+    There are many ways of installing GPG client, the easiest one is via Homebrew or `GPG Suite <https://gpgtools.org/>`_.
+    After generating the key, add it in `Github settings <https://github.com/settings/keys>`_ and then follow this `article <https://help.github.com/articles/telling-git-about-your-gpg-key/`_ to tell GPG about your key.
+    
 Bash
 ----
 
@@ -161,42 +198,6 @@ Npm-X (makes commands from local environment available)::
 
     npm install npx -g
 
-Version Control
-===============
-
-Git::
-
-    brew install git
-
-Output::
-
-    ==> Caveats
-    The OS X keychain credential helper has been installed to:
-      /usr/local/bin/git-credential-osxkeychain
-
-    The 'contrib' directory has been installed to:
-      /usr/local/share/git-core/contrib
-
-    Bash completion has been installed to:
-      /usr/local/etc/bash_completion.d
-
-    zsh completion has been installed to:
-      /usr/local/share/zsh/site-functions
-
-    cd ~/.ssh
-    ssh-keygen -t rsa -C "alex.zagoro@eagerminds.nyc"
-    pbcopy < ~/.ssh/id_rsa.pub
-
-Set global git settings::
-
-    git config --global user.name "Alex Zagoro"
-    git config --global user.email "alex.zagoro@eagerminds.nyc"
-    git config --global color.ui true
-
-GPG Signing::
-
-    There are many ways of installing GPG client, the easiest one is via Homebrew or `GPG Suite <https://gpgtools.org/>`_.
-    After generating the key, add it in `Github settings <https://github.com/settings/keys>`_ and then follow this `article <https://help.github.com/articles/telling-git-about-your-gpg-key/`_ to tell GPG about your key.
 
 Data Stores
 ===========
