@@ -2,7 +2,7 @@
 Configuring OSX for Development
 ===============================
 
-This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX 10.12.x (Yosemite) with Xcode 8.3.x.
+This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX 11.1 (Big Sur).
 
 Xcode
 -----
@@ -17,7 +17,7 @@ Homebrew
 
 Install::
 
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew doctor
 
 You can use either `bash` or `zshell`, your choice.
@@ -42,12 +42,6 @@ Add the path to the shell you want to use if not already present, then set it::
 
     chsh -s /usr/local/bin/bash
 
-wget
-----
-
-Install::
-
-    brew install wget
 
 Z shell
 -------
@@ -110,6 +104,13 @@ Now link ``.zshrc`` and ``bin``::
     ln -s /path/to/dotfiles_repo/bin
     source ~/.zshrc
 
+wget
+----
+
+Install::
+
+    brew install wget
+    
 rsync
 -----
 
