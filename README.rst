@@ -200,6 +200,10 @@ Npm-X (makes commands from local environment available)::
 
     npm install npx -g
 
+NVM::
+    
+    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+
 
 Data Stores
 ===========
@@ -212,60 +216,6 @@ Just download and install Postgres.app from https://postgresapp.com/ (which come
 Enable CLI::
 
 	sudo mkdir -p /etc/paths.d && echo /Applications/Postgres.app/Contents/Versions/latest/bin | sudo tee /etc/paths.d/postgresapp
-
-
-MySQL
------
-
-PostgreSQL is always preferred but sometimes you don't have a choice::
-
-    brew install mysql
-
-Output::
-
-    ==> Caveats
-    A "/etc/my.cnf" from another install may interfere with a Homebrew-built
-    server starting up correctly.
-
-    To connect:
-      mysql -uroot
-
-    To have launchd start mysql at login:
-      ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
-    Then to load mysql now:
-      launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-    Or, if you don't want/need launchctl, you can just run:
-      mysql.server start
-
-Create a database and set permissions for development::
-
-    mysql -uroot
-
-    CREATE DATABASE project CHARACTER SET UTF8;
-    GRANT ALL PRIVILEGES ON project.* TO 'web'@'localhost' WITH GRANT OPTION;
-
-MongoDB
--------
-
-Install::
-
-    brew install mongodb
-
-Output::
-
-    ==> Caveats
-    To have launchd start mongodb at login:
-        ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
-    Then to load mongodb now:
-        launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
-    Or, if you don't want/need launchctl, you can just run:
-        mongod
-
-
-You have to create a data directory. By default it expects the data to be stored in ``/data/db``
-Otherwise, create a directory and pass the path when running the server::
-
-    mongod --dbpath=/Users/sallysue/Projects/data/mongodb
 
 Redis
 -----
@@ -284,23 +234,6 @@ Output::
     Or, if you don't want/need launchctl, you can just run:
         redis-server /usr/local/etc/redis.conf
 
-Memcached
----------
-
-Install::
-
-    brew install memcached
-
-Output::
-
-    To have launchd start memcached at login:
-        ln -sfv /usr/local/opt/memcached/*.plist ~/Library/LaunchAgents
-    Then to load memcached now:
-        launchctl load ~/Library/LaunchAgents/homebrew.mxcl.memcached.plist
-    Or, if you don't want/need launchctl, you can just run:
-        /usr/local/opt/memcached/bin/memcached
-
-
 Search Engine Backends
 ======================
 
@@ -316,36 +249,13 @@ Run in on system start::
     brew services start elasticsearch
 
 
-Web Servers
-===========
-
-Nginx
------
-
-Install::
-
-    gem install passenger
-    brew install nginx --with-passenger --with-debug --with-spdy --with-gunzip
-
-Output::
-
-    ==> Caveats
-    Docroot is: /usr/local/var/www
-
-    The default port has been set to 8080 so that nginx can run without sudo.
-
-    If you want to host pages on your local machine to the wider network you
-    can change the port to 80 in: /usr/local/etc/nginx/nginx.conf
-
-    You will then need to run nginx as root: `sudo nginx`.
-
-    To have launchd start nginx at login:
-        ln -sfv /usr/local/opt/nginx/*.plist ~/Library/LaunchAgents
-    Then to load nginx now:
-        launchctl load ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist
-
 Miscellaneous tools
 ===================
+
+Zlib
+----
+
+    brew install zlib
 
 JQ
 --
