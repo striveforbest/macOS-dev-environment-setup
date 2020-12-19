@@ -20,7 +20,6 @@ Install::
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew doctor
 
-You can use either `bash` or `zshell`, your choice.
 
 Version Control
 ===============
@@ -58,7 +57,16 @@ GPG Signing::
 
 There are many ways of installing GPG client, the easiest one is via Homebrew or `GPG Suite <https://gpgtools.org/>`_.
 After generating the key, add it in `Github settings <https://github.com/settings/keys>`_ and then follow this `article <https://help.github.com/articles/telling-git-about-your-gpg-key/`_ to tell GPG about your key.
-    
+
+wget
+----
+
+Install::
+
+    brew install wget
+
+You can use either `bash` or `zshell`, your choice.
+
 Bash
 ----
 
@@ -141,12 +149,6 @@ Now link ``.zshrc`` and ``bin``::
     ln -s /path/to/dotfiles_repo/bin
     source ~/.zshrc
 
-wget
-----
-
-Install::
-
-    brew install wget
     
 rsync
 -----
