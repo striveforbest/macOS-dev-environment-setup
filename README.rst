@@ -180,6 +180,10 @@ pyenv (optional)::
 
     brew install pyenv pyenv-virtualenv pyenv-virtualenvwrapper
 
+Hopefully, temporary fix:
+
+    ln -s /usr/local/bin/pip3 /usr/local/bin/pip
+
 pip::
 
     pip install --upgrade setuptools
