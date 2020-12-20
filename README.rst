@@ -111,6 +111,10 @@ Output::
 
       chmod go-w '/usr/local/share'
 
+Update default shell::
+
+    chsh -s $(which zsh)
+
 Oh My Zsh
 ---------
 
