@@ -343,3 +343,11 @@ To update your installed brews::
     brew outdated
     brew upgrade
     brew cleanup
+
+
+OSX-specific settings
+=====================
+
+Allow opening apps from unidentified developers::
+
+    sudo spctl --master-disable
