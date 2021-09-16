@@ -17,7 +17,7 @@ Homebrew
 
 Install::
 
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     brew doctor
 
 
@@ -50,7 +50,7 @@ Output::
 Set global git settings::
 
     git config --global user.name "Alex Zagoro"
-    git config --global user.email "alex.zagoro@eagerminds.nyc"
+    git config --global user.email "alex.zagoro@eagerminds.co"
     git config --global color.ui true
 
 GPG Signing::
