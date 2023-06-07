@@ -46,14 +46,16 @@ Output::
     zsh completion has been installed to:
       /usr/local/share/zsh/site-functions
 
-    cd ~/.ssh
-    ssh-keygen -t rsa -C "alex.zagoro@eagerminds.nyc"
+Set up new public SSH key::
+
+    mkdir -p ~/.ssh && cd ~/.ssh
+    ssh-keygen -t rsa -C "alex@eagerminds.co"
     pbcopy < ~/.ssh/id_rsa.pub
 
 Set global git settings::
 
     git config --global user.name "Alex Zagoro"
-    git config --global user.email "alex.zagoro@eagerminds.co"
+    git config --global user.email "alex@eagerminds.co"
     git config --global color.ui true
 
 GPG Signing::
