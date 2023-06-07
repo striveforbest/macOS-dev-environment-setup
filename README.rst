@@ -2,7 +2,7 @@
 Configuring OSX for Development
 ===============================
 
-This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX 11.1 (Big Sur).
+This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX Ventura (13.3).
 
 Xcode
 -----
@@ -17,9 +17,12 @@ Homebrew
 
 Install::
 
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew doctor
 
+Before we get around to setting up Z Shell, add Homebrew to PATH::
+
+    export PATH=/opt/homebrew/bin:$PATH
 
 Version Control
 ===============
