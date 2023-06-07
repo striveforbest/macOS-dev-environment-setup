@@ -46,10 +46,10 @@ Output::
     zsh completion has been installed to:
       /usr/local/share/zsh/site-functions
 
-Set up new public SSH key::
+Set up new public SSH key (or restore existing)::
 
     mkdir -p ~/.ssh && cd ~/.ssh
-    ssh-keygen -t rsa -C "alex@eagerminds.co"
+    ssh-keygen -t rsa -b 4096 -C "alex@eagerminds.co"
     pbcopy < ~/.ssh/id_rsa.pub
 
 Set global git settings::
@@ -114,7 +114,7 @@ Output::
     Additionally, if you receive "zsh compinit: insecure directories" warnings when attempting
     to load these completions, you may need to run this:
 
-      chmod go-w '/usr/local/share'
+      chmod -R go-w '/opt/homebrew/share/zsh'
 
 Update default shell::
 
@@ -215,7 +215,7 @@ Npm-X (makes commands from local environment available)::
 
 NVM::
     
-    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 
 Data Stores
@@ -240,12 +240,10 @@ Install::
 Output::
 
     ==> Caveats
-    To have launchd start redis at login:
-        ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
-    Then to load redis now:
-        launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
-    Or, if you don't want/need launchctl, you can just run:
-        redis-server /usr/local/etc/redis.conf
+    To start redis now and restart at login:
+        brew services start redis
+    Or, if you don't want/need a background service you can just run:
+        /opt/homebrew/opt/redis/bin/redis-server /opt/homebrew/etc/redis.conf
 
 Search Engine Backends
 ======================
