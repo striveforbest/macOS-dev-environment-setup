@@ -31,81 +31,58 @@ Git::
 
     brew install git
 
-Output::
-
-    ==> Caveats
-    The OS X keychain credential helper has been installed to:
-      /usr/local/bin/git-credential-osxkeychain
-
-    The 'contrib' directory has been installed to:
-      /usr/local/share/git-core/contrib
-
-    Bash completion has been installed to:
-      /usr/local/etc/bash_completion.d
-
-    zsh completion has been installed to:
-      /usr/local/share/zsh/site-functions
-
 Set up new public SSH key (or restore existing)::
 
     mkdir -p ~/.ssh && cd ~/.ssh
     ssh-keygen -t rsa -b 4096 -C "alex@eagerminds.co"
     pbcopy < ~/.ssh/id_rsa.pub
 
-Set global git settings::
+Install `GPG Suite <https://gpgtools.org/>`_ and follow the instructions to `set up commit signing <https://docs.github.com/en/authentication/managing-commit-signature-verification>`_.
+
+Set global git settings (or restore from `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_::
 
     git config --global user.name "Alex Zagoro"
     git config --global user.email "alex@eagerminds.co"
     git config --global color.ui true
 
-GPG Signing::
 
-There are many ways of installing GPG client, the easiest one is via Homebrew or `GPG Suite <https://gpgtools.org/>`_.
-After generating the key, add it in `Github settings <https://github.com/settings/keys>`_ and then follow this `article <https://help.github.com/articles/telling-git-about-your-gpg-key/`_ to tell GPG about your key.
-
-wget
+curl/wget
 ----
 
 Install::
 
-    brew install wget
-
-You can use either `bash` or `zshell`, your choice.
-
-Bash
-----
-
-Install::
-
-    brew install bash
-
-Update the default shell::
-
-    sudo vim /etc/shells
-
-Paste in above all other entires::
-
-    /usr/local/bin/bash
-
-
-Add the path to the shell you want to use if not already present, then set it::
-
-    chsh -s /usr/local/bin/bash
+    brew install curl wget
 
 
 Z shell
 -------
 
-Install::
+Mac OS Ventura+ has zsh preinstalled, but you should install some plugins::
 
-    brew install zsh zsh-completions zsh-autosuggestions zsh-syntax-highlighting
+    brew install zsh-completions zsh-autosuggestions zsh-syntax-highlighting
 
 Output::
 
     ==> Caveats
+    To activate the syntax highlighting, add the following at the end of your .zshrc:
+      source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+    If you receive "highlighters directory not found" error message,
+    you may need to add the following to your .zshenv:
+      export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
+    ==> Summary
+    🍺  /opt/homebrew/Cellar/zsh-syntax-highlighting/0.7.1: 27 files, 164.7KB
+    ==> Running `brew cleanup zsh-syntax-highlighting`...
+    ==> Caveats
+    ==> zsh-completions
     To activate these completions, add the following to your .zshrc:
 
-      fpath=(/usr/local/share/zsh-completions $fpath)
+      if type brew &>/dev/null; then
+        FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+        autoload -Uz compinit
+        compinit
+      fi
 
     You may also need to force rebuild `zcompdump`:
 
@@ -115,6 +92,19 @@ Output::
     to load these completions, you may need to run this:
 
       chmod -R go-w '/opt/homebrew/share/zsh'
+    ==> zsh-autosuggestions
+    To activate the autosuggestions, add the following at the end of your .zshrc:
+
+      source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+    You will also need to restart your terminal for this change to take effect.
+    ==> zsh-syntax-highlighting
+    To activate the syntax highlighting, add the following at the end of your .zshrc:
+      source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+    If you receive "highlighters directory not found" error message,
+    you may need to add the following to your .zshenv:
+      export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 
 Update default shell::
 
@@ -127,7 +117,7 @@ Oh My Zsh is an open source, community-driven framework for managing your zsh co
 
 Install::
 
-    sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 powerlevel9k
 ------------
@@ -136,7 +126,7 @@ Oh My Zsh theme. `Instructions <https://github.com/bhilburn/powerlevel9k/wiki/In
 
 Install::
 
-    git clone git@github.com:bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+    $ git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 
 Install powerline `fonts <https://github.com/powerline/fonts>`_::
 
@@ -146,30 +136,29 @@ Install powerline `fonts <https://github.com/powerline/fonts>`_::
 
 Keep in mind, you'll need to set the fonts in your `iTerm` Settings -> Profiles -> Text -> Change Font -> Meslo LG S DZ Regular for Powerline.
 
-.zshrc
+Symlink dot files
 ------
 
-``~/.zshrc`` is available on `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_
-
-Now link ``.zshrc`` and ``bin``::
+Files are available in `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_::
 
     cd
-    ln -s /path/to/dotfiles_repo/.zshrc
-    ln -s /path/to/dotfiles_repo/bin
+    ln -s <PATH>/dotfiles/.zshrc
+    ln -s <PATH>/dotfiles/.zsh_aliases
+    ln -s <PATH>/dotfiles/.zsh_functions
+    ln -s <PATH>/dotfiles/bin
+    ln -s <PATH>/dotfiles/.gitignore_global
+    ln -s <PATH>/dotfiles/.gitconfig
     source ~/.zshrc
 
     
-rsync
+AWS CLI
 -----
 
-OSX's default ``rsync`` is old and dumb. Replace it::
+Install CLI and add profiles/credentials::
 
-    brew install rsync
+    brew install awscli s3cmd
 
-s3cmd
------
-
-``brew install s3cmd``
+Create `~/.aws/config` and `~/.aws/credentials` and set it up.
 
 Programming Languages & Web Frameworks
 ======================================
@@ -177,45 +166,28 @@ Programming Languages & Web Frameworks
 Python
 ------
 
-Homebrew installs pip and distribute by default when installing Python::
-
-    brew install python
-
-pyenv (optional)::
+Install pyenv first::
 
     brew install pyenv pyenv-virtualenv pyenv-virtualenvwrapper
 
-Hopefully, temporary fix:
+Now, you can install multiple Python versions via::
 
-    ln -s /usr/local/bin/pip3 /usr/local/bin/pip
-
-pip::
-
-    pip install --upgrade setuptools
-    pip install --upgrade pip
-
-virtualenvwrapper::
-
-    pip install virtualenvwrapper
+    pyenv install 3.11
 
 Frontend Tools
 --------------
 
-Node::
+Install NVM first::
 
-    brew install node
+    brew install nvm
 
-Npm::
-
-    npm install npm -g
+Which now allows you to install multiple node/npm versions::
+    nvm install 14.15.0
+    nvm use 14.15.0
 
 Npm-X (makes commands from local environment available)::
 
     npm install npx -g
-
-NVM::
-    
-    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 
 Data Stores
@@ -263,53 +235,34 @@ Run in on system start::
 Miscellaneous tools
 ===================
 
-Zlib
-----
+`Zlib <https://www.zlib.net/>`_::
 
     brew install zlib
 
-OpenSSL
-----
+`OpenSSL <https://www.openssl.org/>`_::
 
     brew install openssl
     
-JQ
---
-
-jq is a tool for processing JSON inputs, applying the given filter to its JSON text inputs and producing the filter's results as JSON on standard output.
+`JQ <https://jqlang.github.io/jq/>`_::
 
     brew install jq
 
-Vault
------
-
-Vault is a tool for securely accessing secrets. `Documentaion <https://www.vaultproject.io/intro/index.html>`_
+`Vault <https://www.vaultproject.io/intro/index.html>`_::
 
     brew install vault
 
-Htop
-----
-
-A tool to display all running processes::
+`Htop <https://htop.dev/>`_::
 
     brew install htop
 
-Cheat
------
+`Cheat <https://github.com/cheat/cheat>`_::
 
-A tool to view/create cheatsheets for *nix commands. Install with easy_install/pip::
-
-    easy_install cheat
-
-Use::
-
+    brew install cheat
+    # Usage
     cheat -l
     cheat tar
 
-Fortune
--------
-
-Some fortune telling wouldn't hurt::
+`Fortune <https://github.com/bmc/fortune>`_::
 
     brew install fortune
 
