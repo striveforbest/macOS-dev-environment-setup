@@ -37,7 +37,15 @@ Set up new public SSH key (or restore existing)::
     ssh-keygen -t rsa -b 4096 -C "alex@eagerminds.co"
     pbcopy < ~/.ssh/id_rsa.pub
 
-Install `GPG Suite <https://gpgtools.org/>`_ and follow the instructions to `set up commit signing <https://docs.github.com/en/authentication/managing-commit-signature-verification>`_.
+`GPG Suite <https://gpgtools.org/>`_
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+After installation, follow the instructions to `set up commit signing <https://docs.github.com/en/authentication/managing-commit-signature-verification>`_.
+
+You'll need `pinentry`::
+
+    brew install pinentry-mac
+
 
 Set global git settings (or restore from `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_::
 
@@ -141,8 +149,9 @@ Files are available in `Dotfiles repository <https://github.com/StriveForBest/do
 
     cd
     ln -s <PATH>/dotfiles/.zshrc
-    ln -s <PATH>/dotfiles/.zsh_aliases
-    ln -s <PATH>/dotfiles/.zsh_functions
+    ln -s <PATH>/dotfiles/.profile
+    ln -s <PATH>/dotfiles/.aliases
+    ln -s <PATH>/dotfiles/.functions
     ln -s <PATH>/dotfiles/bin
     ln -s <PATH>/dotfiles/.gitignore_global
     ln -s <PATH>/dotfiles/.gitconfig
@@ -150,7 +159,7 @@ Files are available in `Dotfiles repository <https://github.com/StriveForBest/do
 
     Set up GPG config:
     mkdir -p ~/.gnupg
-    ln -s
+    ln -s <PATH>/dotfiles/.gnupg/gpg-agent.conf ~/.gnupg/.
 
 AWS CLI
 ^^^^^^^
