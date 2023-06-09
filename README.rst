@@ -5,7 +5,7 @@ Configuring OSX for Development
 This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX Ventura (13.3).
 
 Xcode
------
+^^^^^
 
 Install Xcode from the App Store.
 Install Command Line Tools::
@@ -13,7 +13,7 @@ Install Command Line Tools::
     xcode-select --install
 
 Homebrew
---------
+^^^^^^^^
 
 Install::
 
@@ -24,10 +24,10 @@ Before we get around to setting up Z Shell, add Homebrew to PATH::
 
     export PATH=/opt/homebrew/bin:$PATH
 
-Version Control
-===============
+Git
+^^^
 
-Git::
+Install::
 
     brew install git
 
@@ -45,17 +45,15 @@ Set global git settings (or restore from `Dotfiles repository <https://github.co
     git config --global user.email "alex@eagerminds.co"
     git config --global color.ui true
 
-
-curl/wget
-----
+cURL/wget
+^^^^^^^^^
 
 Install::
 
     brew install curl wget
 
-
 Z shell
--------
+^^^^^^^
 
 Mac OS Ventura+ has zsh preinstalled, but you should install some plugins::
 
@@ -111,7 +109,7 @@ Update default shell::
     chsh -s $(which zsh)
 
 Oh My Zsh
----------
+^^^^^^^^^
 
 Oh My Zsh is an open source, community-driven framework for managing your zsh configuration. `Instructions <https://github.com/robbyrussell/oh-my-zsh>`_
 
@@ -120,7 +118,7 @@ Install::
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 powerlevel9k
-------------
+^^^^^^^^^^^^
 
 Oh My Zsh theme. `Instructions <https://github.com/bhilburn/powerlevel9k/wiki/Install-Instructions#option-2-install-for-oh-my-zsh>`_
 
@@ -136,8 +134,8 @@ Install powerline `fonts <https://github.com/powerline/fonts>`_::
 
 Keep in mind, you'll need to set the fonts in your `iTerm` Settings -> Profiles -> Text -> Change Font -> Meslo LG S DZ Regular for Powerline.
 
-Symlink dot files
-------
+Dot files
+=========
 
 Files are available in `Dotfiles repository <https://github.com/StriveForBest/dotfiles>`_::
 
@@ -150,21 +148,24 @@ Files are available in `Dotfiles repository <https://github.com/StriveForBest/do
     ln -s <PATH>/dotfiles/.gitconfig
     source ~/.zshrc
 
-    
+    Set up GPG config:
+    mkdir -p ~/.gnupg
+    ln -s
+
 AWS CLI
------
+^^^^^^^
 
 Install CLI and add profiles/credentials::
 
     brew install awscli s3cmd
 
-Create `~/.aws/config` and `~/.aws/credentials` and set it up.
+Create `~/.aws/config` and `~/.aws/credentials` and set them up.
 
-Programming Languages & Web Frameworks
-======================================
+Programming Languages
+=====================
 
 Python
-------
+^^^^^^
 
 Install pyenv first::
 
@@ -175,7 +176,7 @@ Now, you can install multiple Python versions via::
     pyenv install 3.11
 
 Frontend Tools
---------------
+==============
 
 Install NVM first::
 
@@ -194,16 +195,16 @@ Data Stores
 ===========
 
 PostgreSQL
-----------
+^^^^^^^^^^
 
 Just download and install Postgres.app from https://postgresapp.com/ (which comes with Postgis)
 
 Enable CLI::
 
-	sudo mkdir -p /etc/paths.d && echo /Applications/Postgres.app/Contents/Versions/latest/bin | sudo tee /etc/paths.d/postgresapp
+    sudo mkdir -p /etc/paths.d && echo /Applications/Postgres.app/Contents/Versions/latest/bin | sudo tee /etc/paths.d/postgresapp
 
 Redis
------
+^^^^^
 
 Install::
 
@@ -217,11 +218,9 @@ Output::
     Or, if you don't want/need a background service you can just run:
         /opt/homebrew/opt/redis/bin/redis-server /opt/homebrew/etc/redis.conf
 
-Search Engine Backends
-======================
 
 ElasticSearch
--------------
+^^^^^^^^^^^^^
 
 Install::
 
@@ -242,7 +241,7 @@ Miscellaneous tools
 `OpenSSL <https://www.openssl.org/>`_::
 
     brew install openssl
-    
+
 `JQ <https://jqlang.github.io/jq/>`_::
 
     brew install jq
@@ -267,7 +266,7 @@ Miscellaneous tools
     brew install fortune
 
 Image processing utils
-----------------------
+======================
 
 Install for full support of PIL/Pillow::
 
@@ -275,19 +274,19 @@ Install for full support of PIL/Pillow::
     brew install freetype graphicsmagick jpegoptim lcms libjpeg libpng libtiff openjpeg optipng pngcrush webp
 
 Video processing utils
----------------------
+======================
 
 FFmpeg::
 
     brew install ffmpeg
-    
+
 To see a full list of FFmpeg options::
 
     brew options ffmpeg
 
 
 Homebrew maintenance
---------------------
+====================
 
 Get a checkup from the doctor and follow the doctor's instructions::
 
