@@ -316,8 +316,8 @@ To update your installed brews::
     brew cleanup
 
 
-OSX-specific settings
-=====================
+OS-specific settings
+====================
 
 Allow opening apps from unidentified developers::
 
