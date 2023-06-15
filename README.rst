@@ -1,8 +1,15 @@
-===============================
-Configuring OSX for Development
-===============================
+=================================
+Configuring macOS for Development
+=================================
 
-This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of OSX Ventura (13.3).
+This doc assumes you are doing a clean install of `Homebrew <http://mxcl.github.io/homebrew/>`_ on a clean install of macOS Ventura (13.3).
+
+iTerm2
+^^^^^^
+- `Download <https://iterm2.com/downloads.html>`_ and install iTerm2.
+
+- Set up `Shell Integration <https://iterm2.com/documentation-shell-integration.html>`_ and set up the shortcuts.
+
 
 Xcode
 ^^^^^
