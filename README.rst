@@ -60,6 +60,49 @@ Set global git settings (or restore from `Dotfiles repository <https://github.co
     git config --global user.email "alex@eagerminds.co"
     git config --global color.ui true
 
+Now, you can add your old-style SSH key as a subkey to GPG.
+
+First, export your public key from `id_rsa` private key (you might be able to skip it if you already have pubkey)::
+
+    ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
+
+Then, convert `id_rsa.pub` public key to the OpenPGP format::
+
+    gpg --export-options export-minimal --export OpenPGP ~/.ssh/id_rsa.pub > ~/.ssh/id_rsa_opengpg.pub
+
+Import it into your GPG keyring::
+
+    gpg --import ~/.ssh/id_rsa_opengpg.pub
+
+Associate the subkey with your GPG key.
+
+First, obtain the Key ID::
+
+    gpg --list-keys
+
+Look for the line that starts with "pub" and contains your key's email address.
+The Key ID is the 8-character hexadecimal code next to the email address.
+
+Once you have the Key ID, add the subkey to your GPG key::
+
+    gpg --edit-key <Key ID>
+
+Inside the GPG key editing interface, enter the following command to add the subkey::
+
+    addkey
+
+Select the option for "RSA (sign only)" or "RSA (encrypt only)," depending on the purpose of the subkey.
+Follow the prompts to enter a passphrase (optional) and complete the subkey creation process.
+
+After the subkey is added, use the following command to save the changes and exit the GPG key editing interface::
+
+    save
+
+That's it! You have successfully added your old id_rsa key as a subkey to your GPG key.
+You can verify the addition by listing your GPG keys::
+
+    gpg --list-keys
+
 cURL/wget
 ^^^^^^^^^
 
