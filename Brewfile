@@ -3,6 +3,7 @@
 
 # ─── Taps ─────────────────────────────────────────
 tap "elastic/tap"
+tap "hashicorp/tap"
 
 # ─── Core CLI ─────────────────────────────────────
 brew "git"
@@ -20,16 +21,14 @@ brew "gh"
 brew "cheat"
 brew "fortune"
 
-# ─── Build / libs (referenced by dotfiles .zshrc) ─
+# ─── Build / libs ─────────────────────────────────
 brew "openssl@3"
 brew "zlib"
 brew "readline"
 brew "sqlite"
-brew "libffi"
 brew "bzip2"
 brew "xz"
-brew "libev"
-brew "icu4c"
+brew "icu4c@77"
 brew "openblas"
 brew "graphviz"
 
@@ -56,10 +55,10 @@ brew "pre-commit"
 # ─── Cloud / infra ────────────────────────────────
 brew "awscli"
 brew "azure-cli"
-brew "kubectl"
+brew "kubernetes-cli"
 brew "helm"
-brew "terraform"
-brew "vault"
+brew "hashicorp/tap/terraform"
+brew "hashicorp/tap/vault"
 
 # ─── Data stores ──────────────────────────────────
 brew "redis"
@@ -76,8 +75,8 @@ brew "webp"
 # ─── Casks (apps) ─────────────────────────────────
 cask "iterm2"
 cask "font-meslo-lg-nerd-font"
-cask "docker"
-cask "google-cloud-sdk"
+cask "docker-desktop"
+cask "gcloud-cli"
 cask "google-drive"
 cask "aws-vault"
 cask "sublime-text"
