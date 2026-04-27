@@ -46,6 +46,9 @@ DOTFILES_NESTED=(
   .gnupg/gpg-agent.conf
 )
 
+# Python tools to install via pipx (uses pyenv's Python automatically)
+PIPX_TOOLS=(pipenv poetry pdm)
+
 # ─── Colors / logging ──────────────────────────────────────────────
 B=$'\e[1m'; D=$'\e[2m'; R=$'\e[0m'
 G=$'\e[32m'; Y=$'\e[33m'; C=$'\e[36m'; X=$'\e[31m'
@@ -86,7 +89,6 @@ backup_if_needed() {
   fi
 }
 
-# Get the primary key ID from gpg
 get_gpg_key_id() {
   gpg --list-secret-keys --keyid-format LONG 2>/dev/null \
     | awk '/^sec/ {split($2,a,"/"); print a[2]; exit}'
@@ -110,8 +112,9 @@ This will:
   4. Clone dotfiles to: ${B}$DOTFILES_DIR${R}
   5. Symlink dotfiles into \$HOME
   6. Restore GPG key from backup (or generate new)
-  7. Install Python 3.14 (pyenv) and Node LTS (nvm)
-  8. Apply macOS defaults
+  7. Install Python 3.14 (pyenv) + pipx tools (pipenv, poetry, pdm)
+  8. Install Node LTS (nvm)
+  9. Apply macOS defaults
 
 Restore source: ${B}${RESTORE_FROM:-(none detected)}${R}
   Looking for:
@@ -291,7 +294,6 @@ else
 fi
 
 if [ -n "$KEY_ID" ]; then
-  # These write to the symlinked .gitconfig (i.e., into your dotfiles repo)
   git config --global gpg.program "$(which gpg)"
   git config --global user.signingkey "$KEY_ID"
   git config --global commit.gpgsign true
@@ -299,7 +301,6 @@ if [ -n "$KEY_ID" ]; then
   sub "git configured to sign with $KEY_ID"
   warn "Edits modified your dotfiles .gitconfig — review with: cd $DOTFILES_DIR && git diff"
 
-  # Only prompt to upload if a new key was just made
   if confirm "Copy public key to clipboard and open GitHub?" "n"; then
     gpg --armor --export "$KEY_ID" | pbcopy
     open "https://github.com/settings/gpg/new"
@@ -321,6 +322,33 @@ if confirm "Install Python 3.14?"; then
     pyenv global 3.14
     sub "Python 3.14 installed and set as global"
   fi
+fi
+
+# ─── 8b. Python tools via pipx ─────────────────────────────────────
+log "Python tools (pipx)"
+if command -v pipx &>/dev/null; then
+  for tool in "${PIPX_TOOLS[@]}"; do
+    if pipx list --short 2>/dev/null | awk '{print $1}' | grep -qx "$tool"; then
+      skip "$tool"
+    else
+      if pipx install "$tool" >/dev/null 2>&1; then
+        sub "$tool"
+      else
+        warn "pipx install $tool failed"
+      fi
+    fi
+  done
+  pipx ensurepath >/dev/null 2>&1 || true
+  sub "pipx PATH ensured (open a new shell to pick up changes)"
+else
+  warn "pipx not installed — skipping pipenv/poetry/pdm"
+fi
+
+# uv is a brew package, not pipx — just confirm it's installed
+if command -v uv &>/dev/null; then
+  skip "uv installed ($(uv --version 2>/dev/null | awk '{print $2}'))"
+else
+  warn "uv not installed (should be in Brewfile)"
 fi
 
 # ─── 9. Node (nvm) ─────────────────────────────────────────────────

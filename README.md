@@ -238,6 +238,25 @@ pyenv install 3.14
 pyenv global 3.14
 ```
 
+### Python tools (pipx + uv)
+
+`pipx` and `uv` are installed via the Brewfile. Use pipx to install user-level Python tools (auto-uses pyenv's Python):
+
+```bash
+pipx install pipenv
+pipx install poetry
+pipx install pdm
+pipx ensurepath
+```
+
+`uv` is a brew package — already installed:
+
+```bash
+uv --version
+```
+
+Pipenv auto-detects pyenv. Inside a project with a `.python-version` file or `[requires] python_version = "3.14"` in `Pipfile`, pipenv will use the right Python.
+
 ### Node (nvm)
 
 ```bash
@@ -291,5 +310,5 @@ brew doctor
 - **`fatal: cannot exec '/usr/local/bin/gpg'`** — `git config --global gpg.program $(which gpg)`
 - **`[oh-my-zsh] plugin 'zsh-syntax-highlighting' not found`** — brew-installed plugins go at the *end* of `.zshrc`, not in OMZ `plugins=(...)`
 - **SSH keys restored from cloud storage and SSH refuses them** — permissions got mangled; `chmod 700 ~/.ssh && chmod 600 ~/.ssh/id_*`
-
 - **`pygmentize: command not found`** — install pygments: `brew install pygments` (already in Brewfile)
+- **`pipenv: command not found` after `pipx install pipenv`** — open a new shell so PATH picks up `~/.local/bin`

@@ -49,6 +49,9 @@ brew "pyenv-virtualenv"
 brew "pyenv-virtualenvwrapper"
 brew "nvm"
 brew "pygments"
+brew "pipx"
+brew "uv"
+brew "pre-commit"
 
 # ─── Cloud / infra ────────────────────────────────
 brew "awscli"
